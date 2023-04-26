@@ -184,12 +184,14 @@ class vuelo:
     def check_nro_vuelo(nro_vuelo):
         while len(nro_vuelo)!=4 or not nro_vuelo.isnumeric():
             nro_vuelo = input("Error, debe ingresar un número de 4 dígitos: ")
+        return nro_vuelo
     
     #Chequea si el precio ingresado es un número positivo
     @staticmethod
     def check_precio_vuelo(precio):
         while int(precio) < 0 or not precio.isnumeric():
             precio = input("El precio tiene que ser un número positivo: ")
+        return precio
 
     #Busca en la clase empleado si el legajo dado corresponde a un empleado, luego verifica si es un piloto
     @staticmethod
