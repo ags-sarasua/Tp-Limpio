@@ -149,6 +149,13 @@ class avion:
         self.estado=estado
         print('Se creo bien')
     
+    #dado un número de serie, elimina la instancia de la lista de aviones
+    def eliminarAvion(nro_serie,matriz_aviones):
+        for i in matriz_aviones:
+            if i[0]==nro_serie:
+                matriz_aviones.pop(i)
+        return matriz_aviones
+    
     #Chequea que el número de serie del avión sea un número de 10 dígitos
     @staticmethod
     def check_nro_serie(nro_serie):
@@ -162,13 +169,6 @@ class avion:
         while(estado not in ['En servicio','Fuera de servicio']):
             estado=input('Ingrese nuevamente el estado del avion:    ')
         return estado
-    
-    #dado un número de serie, elimina la instancia de la lista de aviones
-    def eliminarAvion(nro_serie,matriz_aviones):
-        for i in matriz_aviones:
-            if i[0]==nro_serie:
-                matriz_aviones.pop(i)
-        return matriz_aviones
     
 class vuelo:
     def __init__(self,nro_vuelo,aeropuerto_salida,aeropuerto_llegada,nro_serie,legajo_piloto,precio):
@@ -204,6 +204,15 @@ class vuelo:
                     vuelo.check_piloto(nuevo_legajo, lista_empleado)
                 break 
         return legajo_piloto
+
+    #Verifica que el número de serie del avión sea de uno existente
+    @staticmethod
+    def check_nro_serie(nro_serie,lista_nro_serie):
+            while True:
+                for serie in lista_nro_serie:
+                    if serie.nro_serie==nro_serie:
+                        return avion.check_nro_serie(nro_serie)
+                nro_serie = input("Error, el número de serie no existe. Intente de nuevo.")
        
 class viaje:
     capacidad=5
@@ -221,24 +230,6 @@ class viaje:
                 lista_viaje.pop(viaje)
         return lista_viaje
 
-    #Chequea que el vuelo existe en la clase Vuelo
-    @staticmethod
-    def check_vuelo(nro_vuelo,lista_vuelo):
-        while True:
-            for vuelo in lista_vuelo:
-                if vuelo.nro_vuelo == nro_vuelo:
-                    return nro_vuelo
-            nro_vuelo = input("Error, el vuelo no existe. Intente de nuevo.")
-    
-    #Chequea que el avión existe en la clase Avión 
-    @staticmethod
-    def check_avion(nro_serie,lista_avion):        
-        while True:
-            for avion in lista_avion:
-                if avion.nro_serie == nro_serie and avion.estado == "En servicio":
-                    return nro_serie
-            nro_serie = input("Error, el avión no existe o está fuera de servicio. Intente de nuevo.") 
-
     def agregarpasajero(self,pasajero):
         if self.contador_pasajeros < viaje.capacidad:
             self.pasajeros.append(pasajero)
@@ -254,7 +245,24 @@ class viaje:
                 self.contador_pasajeros-=1
                 return True
             else:
-                return False 
+                return False
+
+    #Chequea que el vuelo existe en la clase Vuelo
+    @staticmethod
+    def check_vuelo(nro_vuelo,lista_vuelo):
+        while True:
+            for vuelo in lista_vuelo:
+                if vuelo.nro_vuelo == nro_vuelo:
+                    return nro_vuelo
+            nro_vuelo = input("Error, el vuelo no existe. Intente de nuevo.")
+
+    @staticmethod()
+    def check_disponibilidad(self,nro_serie):
+        if self.nro_serie==nro_serie:
+            if self.estado=='Fuera de servicio':
+                return False
+            else:
+                return True 
 
 class reserva: 
     def __init__(self,nro_reserva,DNI_cliente,legajo_empleado,nro_viaje,monto):
