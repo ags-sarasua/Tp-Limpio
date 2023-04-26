@@ -198,8 +198,12 @@ class vuelo:
     def check_piloto(legajo_piloto,lista_empleado):  
         for empleado in lista_empleado:
             if empleado.legajo == legajo_piloto:
-                return empleado.esPiloto()
-        return False
+                piloto = empleado.esPiloto()
+                while(piloto == False):
+                    nuevo_legajo = ("Este empleado no es un piloto, ingrese nuevamente")
+                    vuelo.check_piloto(nuevo_legajo, lista_empleado)
+                break 
+        return legajo_piloto
        
 class viaje:
     capacidad=5
