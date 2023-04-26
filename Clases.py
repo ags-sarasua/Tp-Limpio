@@ -110,6 +110,18 @@ class empleado(persona):
     def esPiloto(self):
         return self.sector == "piloto"
 
+    def ActualizarEmpleado(DNI, PorCual, indice, lista_empleado):
+        for empleado in lista_empleado:
+            if empleado.DNI == DNI and (indice-1) < len(lista_empleado) and indice >= 1:
+                lista_empleado[indice-1] = PorCual
+        return lista_empleado
+        
+    def eliminarEmpleado(DNI,lista_empleado):
+        for empleado in lista_empleado:
+            if empleado.DNI==DNI:
+                lista_empleado.pop(empleado)
+        return lista_empleado
+
     #chequear legajo: que sea un numero de 4 digitos y que no esté repetido 
     @staticmethod
     def checklegajo(legajo, lista_empleado):
@@ -294,7 +306,7 @@ class reserva:  #Chequeado
                     return legajo_empleado
             legajo_empleado=input('Ingrese nuevamente su Legajo:    ')
             
-    #Verifica que 
+    #Verifica que s
     @staticmethod
     def check_viaje(nro_viaje,lista_viaje):
         while(True):
