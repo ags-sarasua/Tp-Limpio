@@ -21,7 +21,7 @@ def validarFecha():
 
 #login recibe un usuario y una contraseña para chequear si está en el sistema. 
 def login(usuario, contrasenia):
-    with open("Usuarios.txt", 'r', encoding='utf-8') as archivo:
+    with open("hola.txt", 'r', encoding='utf-8') as archivo:
         listaUsuarios=[]
         listacontraseñas=[]
         for linea in archivo:
@@ -37,7 +37,7 @@ def login(usuario, contrasenia):
 
 #registrarse escribe el archivo que tiene los usuarios y contraseñas para registrar un nuevo usuario
 def registrarse(usuario,contrasenia):
-    with open("Usuarios.txt", 'a', encoding='utf-8') as archivo:
+    with open("hola.txt", 'a', encoding='utf-8') as archivo:
             archivo.write(f"\n{usuario}.{contrasenia}")
             print("Se creó el usuario")
             return True
@@ -257,7 +257,7 @@ class viaje:
             nro_vuelo = input("Error, el vuelo no existe. Intente de nuevo.")
 
     #Verifica si el avión está en servicio activo
-    @staticmethod()
+    @staticmethod
     def check_disponibilidad(self,nro_serie):
         if self.nro_serie==nro_serie:
             if self.estado=='Fuera de servicio':

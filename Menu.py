@@ -192,4 +192,5 @@ def menu():
             us, con = input("Ingrese su usuario y contraseña: ").split()
             if login(us, con):
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
-    
+
+menu()

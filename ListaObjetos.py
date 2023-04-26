@@ -30,8 +30,6 @@ lista_persona.append(p8)
 lista_persona.append(p9)
 lista_persona.append(p10)
 
-
-
 #empleado
 lista_empleado=Lista()
 
