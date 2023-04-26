@@ -170,14 +170,6 @@ class avion:
                 matriz_aviones.pop(i)
         return matriz_aviones
     
-    #devuelve el estado de un avión especificado
-    def check_estado(self,nro_serie):
-        if self.nro_serie==nro_serie:
-            if self.estado=='Fuera de servicio':
-                return False
-            else:
-                return True 
-
 class vuelo:
     def __init__(self,nro_vuelo,aeropuerto_salida,aeropuerto_llegada,nro_serie,legajo_piloto,precio):
         self.nro_vuelo=nro_vuelo
