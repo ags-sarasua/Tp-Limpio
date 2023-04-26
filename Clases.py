@@ -118,20 +118,17 @@ class empleado(persona):
                 print('El legajo debe ser un número')
                 legajo=input("Ingrese el legajo nuevamente:")
                 legajo=empleado.checklegajo(legajo, lista_empleado)
-
         elif(len(legajo) != 4):
             print('El legajo debe tener 4 caracteres')
             legajo=input("Ingrese el legajo nuevamente:")
             legajo = empleado.checklegajo(legajo, lista_empleado)
-
         else:        
             for e in lista_empleado:
                 if(e.legajo == legajo):
                     print('El legajo ingresado ya existe')
                     legajo=input("Ingrese el legajo nuevamente:")
                     legajo = empleado.checklegajo(legajo, lista_empleado)
-                    break
-                                
+                    break                                
         return legajo    
                              
     #chequear sector: que sea un sector preexistente
@@ -261,7 +258,7 @@ class viaje:
             else:
                 return False 
 
-class reserva:  #Chequeado
+class reserva: 
     def __init__(self,nro_reserva,DNI_cliente,legajo_empleado,nro_viaje,monto):
         self.nro_reserva=nro_reserva
         self.DNI_cliente=DNI_cliente
