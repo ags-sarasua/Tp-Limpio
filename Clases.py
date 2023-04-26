@@ -235,12 +235,12 @@ class viaje:
     def check_avion(nro_serie,lista_avion):        
         while True:
             for avion in lista_avion:
-                if avion.nro_serie == nro_serie:
+                if avion.nro_serie == nro_serie and avion.estado == "En servicio":
                     return nro_serie
-            nro_serie = input("Error, el avión no existe. Intente de nuevo.") 
+            nro_serie = input("Error, el avión no existe o está fuera de servicio. Intente de nuevo.") 
 
     def agregarpasajero(self,pasajero):
-        if self.contador_pasajeros < vuelo.capacidad:
+        if self.contador_pasajeros < viaje.capacidad:
             self.pasajeros.append(pasajero)
             self.contador_pasajeros+=1
             return True
