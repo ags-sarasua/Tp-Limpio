@@ -19,11 +19,6 @@ def validarFecha():
     dia = validarNum("dia", 1, 28)
     return(datetime.date(año, mes, dia))
 
-class login():
-    def __init__(self,usuario,contrasenia):
-        self.usuario=usuario
-        self.contrasenia=contrasenia
-
 #login recibe un usuario y una contraseña para chequear si está en el sistema. 
 def login(usuario, contrasenia):
     with open("Usuarios.txt", 'r', encoding='utf-8') as archivo:
@@ -114,12 +109,6 @@ class empleado(persona):
         for empleado in lista_empleado:
             if empleado.DNI == DNI and (indice-1) < len(lista_empleado) and indice >= 1:
                 lista_empleado[indice-1] = PorCual
-        return lista_empleado
-        
-    def eliminarEmpleado(DNI,lista_empleado):
-        for empleado in lista_empleado:
-            if empleado.DNI==DNI:
-                lista_empleado.pop(empleado)
         return lista_empleado
 
     #chequear legajo: que sea un numero de 4 digitos y que no esté repetido 
@@ -306,7 +295,7 @@ class reserva:  #Chequeado
                     return legajo_empleado
             legajo_empleado=input('Ingrese nuevamente su Legajo:    ')
             
-    #Verifica que s
+    #Verifica que el viaje ingresado en la reserva corresponda a uno existente
     @staticmethod
     def check_viaje(nro_viaje,lista_viaje):
         while(True):
@@ -316,6 +305,7 @@ class reserva:  #Chequeado
             nro_viaje=input('Ingrese nuevamente el nro de viaje:    ')        
         return nro_viaje
     
+    #Chequea que el monto ingresado en la reserva sea el correspondiente
     @staticmethod
     def check_monto(monto,nro_viaje,lista_viaje,lista_vuelo):
         for viaje in lista_viaje:
