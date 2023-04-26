@@ -276,6 +276,7 @@ class reserva:  #Chequeado
             nro_reserva=input('Ingrese nuevamente su nro de factura:    ')
         return nro_reserva
     
+    #Verifica que el DNI  sea de un pasajero existente
     @staticmethod
     def check_cliente(DNI_pasajero,lista_pasajero):
         while(True):
@@ -284,6 +285,7 @@ class reserva:  #Chequeado
                     return DNI_pasajero    
             DNI_pasajero=input('Ingrese nuevamente su DNI:    ')
     
+    #Verifica que el legajo del empleado sea de un empleado existente
     @staticmethod
     def check_empleado(legajo_empleado,lista_empleado):
         while(True):
@@ -292,6 +294,7 @@ class reserva:  #Chequeado
                     return legajo_empleado
             legajo_empleado=input('Ingrese nuevamente su Legajo:    ')
             
+    #Verifica que 
     @staticmethod
     def check_viaje(nro_viaje,lista_viaje):
         while(True):
