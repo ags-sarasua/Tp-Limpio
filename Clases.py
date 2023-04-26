@@ -256,6 +256,7 @@ class viaje:
                     return nro_vuelo
             nro_vuelo = input("Error, el vuelo no existe. Intente de nuevo.")
 
+    #Verifica si el avión está en servicio activo
     @staticmethod()
     def check_disponibilidad(self,nro_serie):
         if self.nro_serie==nro_serie:
