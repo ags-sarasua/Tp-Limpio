@@ -2,7 +2,7 @@
 import datetime
 from listasenlazadas import *
 from Clases import *
-from ListaObjetos import *
+#from ListaObjetos import *
 
 #----------------
 
@@ -35,7 +35,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 lista_persona.append(persona(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4]))
                 
             if eleccion_metodo=='B':
-                menu_clase()
+                menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
     
     if eleccion_clase=='2':
         while True:
@@ -58,7 +58,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 listaComodin[2]=persona.check_sexo(listaComodin[2])
                 listaComodin[3]=persona.check_fecha_de_nacimiento(listaComodin[3])
                 listaComodin[4]=persona.check_pais(listaComodin[4])
-                listaComodin[5]=empleado.checklegajo(listaComodin[5])
+                listaComodin[5]=empleado.checklegajo(listaComodin[5], lista_empleado)
                 listaComodin[6]=empleado.checksector(listaComodin[6])
                 lista_empleado.append(empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6]))
             if eleccion_metodo=='3':
@@ -70,7 +70,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 print('El empleado ingresado no se encuentra en la base de datos')
             
             if eleccion_metodo=='B':
-                menu_clase()
+                menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
     if eleccion_clase=='3':
         while True:
@@ -102,7 +102,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     print('El avion con el nro de serie {} se ha eliminado correctamente').format(first_attribute)
                 print('El numero de serie ingresado no se encuentra en la base de datos')
             if eleccion_metodo=='B':
-                menu_clase()
+                menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
             
     if eleccion_clase=='4':
         while True:
@@ -124,7 +124,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 listaComodin[3]=vuelo.check_nro_serie(listaComodin[3]) #Esto es nuevo
                 lista_vuelo.append(vuelo(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5]))
             if eleccion_metodo=='B':
-                menu_clase()
+                menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
             
     if eleccion_clase=='5':
         while True:
@@ -144,18 +144,18 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         listaComodin.append(user_input)
                 #Todos los checks
                 #listaComodin[0]=viaje.check_nro_viaje(listaComodin[0])   #HACERLA
-                listaComodin[1]=viaje.check_vuelo(listaComodin[1])
+                listaComodin[1]=viaje.check_vuelo(listaComodin[1], lista_vuelo)
                 lista_reserva.append(reserva(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3]))
             if eleccion_metodo=='3':
                 first_attribute=input('Ingrese el nro de viaje que desea eliminar: ')
-                posicion=lista_empleado.buscar(first_attribute)
+                posicion=lista_empleado.buscar(first_attribute) #NO FUNCIONA
                 if posicion:
                     lista_empleado.pop(posicion)
                     print('El viaje con el nro {} se ha eliminado correctamente').format(first_attribute)
                 print('El viaje ingresado no se encuentra en la base de datos')
                 pass
             if eleccion_metodo=='B':
-                menu_clase()
+                menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
             
     if eleccion_clase=='6':
         while True:
@@ -163,7 +163,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_reserva)
-            if eleccion_metodo==2:
+            if eleccion_metodo=="2":
                 print('1)Nro reserva   2)DNI cliente   3)Legajo Empleado  4)Nro viaje   5)Monto')
                 listaComodin=[]
                 for i in range(5):
@@ -191,7 +191,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 else:
                     print('La reserva ingresada no se encuentra en la base de datos')
             if eleccion_metodo=='B':
-                menu_clase()
+                menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
 def menu():
     lista_persona=Lista()
