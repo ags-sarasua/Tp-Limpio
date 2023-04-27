@@ -1,4 +1,5 @@
 import datetime
+import ListaObjetos
 
 #validarNum valida que un número ingresado por el usuario sea un número entre cierto rango pedido
 def validarNum(tipoDato, min, max):
@@ -229,23 +230,22 @@ class viaje:
             if viaje.nro_viaje==nro_viaje:
                 lista_viaje.pop(viaje)
         return lista_viaje
-
-    def agregarpasajero(self,pasajero):
-        if self.contador_pasajeros < viaje.capacidad:
-            self.pasajeros.append(pasajero)
-            self.contador_pasajeros+=1
-            return True
-        else:
-            return False
+    
+    def agregarpasajero(self, nroViaje, pasajero, listaViaje):
+        for viaje in listaViaje:
+            if viaje.nro_viaje == nroViaje:
+                if self.contador_pasajeros < viaje.capacidad :
+                    self.pasajeros.append(pasajero)
+                    self.contador_pasajeros+=1
+                    return True
+                else:
+                    return False
 
     def eliminarpasajero(self,pasajero):
         for i in self.pasajeros:
             if i==pasajero:
                 self.pasajeros.pop(pasajero)
                 self.contador_pasajeros-=1
-                return True
-            else:
-                return False
 
     #Chequea que el vuelo existe en la clase Vuelo
     @staticmethod
@@ -274,6 +274,17 @@ class reserva:
         self.monto=monto
         print('Se ejecuto bien')
     
+    def eliminarReserva(nro_reserva,lista_reserva):
+        for reserva in lista_reserva:
+            if reserva.nro_reserva==nro_reserva:
+                lista_reserva.pop(reserva)
+                print('Se ha eliminado la reserva nro {}'.format(reserva.nro_reserva))
+
+    def buscarPasajero(self, nro_reserva, lista_reserva):
+        for reserva in lista_reserva:
+            if reserva.nro_reserva == nro_reserva:
+                return reserva.DNI_cliente
+
     #Pide que el nro de reserva sea un numérico de 4 dígitos
     @staticmethod
     def check_nro_reserva(nro_reserva):
@@ -322,10 +333,5 @@ class reserva:
                             else:
                                 monto=input('Monto incorrecto, ingrese nuevamente su monto:    ')
 
-    def eliminarReserva(nro_reserva,lista_reserva):
-        for reserva in lista_reserva:
-            if reserva.nro_reserva==nro_reserva:
-                lista_reserva.pop(reserva)
-                print('Se ha eliminado la reserva nro {}'.format(reserva.nro_reserva))
     
         

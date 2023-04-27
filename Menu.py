@@ -2,6 +2,7 @@
 import datetime
 from listasenlazadas import *
 from Clases import *
+from ListaObjetos import *
 
 #----------------
 
@@ -18,16 +19,20 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 print(lista_persona)
             if eleccion_metodo=='2':
                 print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais')
-                inputs=[]
+                listaComodin=[]
                 for i in range(5):
-                    user_input = str(input("Inroduzca {} :".format(i+1)))
-                    inputs.append(user_input)
-                input[0]=persona.check_DNI(input[0])
-                input[1]=persona.check_nombre(input[1])
-                input[2]=persona.check_sexo(input[2])
-                input[3]=persona.check_fecha_de_nacimiento(input[3])
-                input[4]=persona.check_pais(input[4])
-                lista_persona.append(persona(inputs[0], inputs[1], inputs[2],inputs[3],inputs[4]))
+                    if i == 3:
+                        print("Ahora a la fecha de nacimiento.")
+                        listaComodin.append(validarFecha())    
+                    else:
+                        user_input = str(input("Inroduzca {} : ".format(i+1)))
+                        listaComodin.append(user_input)
+                listaComodin[0]=persona.check_DNI(listaComodin[0])
+                listaComodin[1]=persona.check_nombre(listaComodin[1])
+                listaComodin[2]=persona.check_sexo(listaComodin[2])
+                listaComodin[3]=persona.check_fecha_de_nacimiento(listaComodin[3])
+                listaComodin[4]=persona.check_pais(listaComodin[4])
+                lista_persona.append(persona(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4]))
                 
             if eleccion_metodo=='B':
                 menu_clase()
@@ -40,19 +45,22 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 print(lista_empleado)
             if eleccion_metodo=='2':
                 print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais    6)Legajo    7)Sector')
-                inputs=[]
+                listaComodin=[]
                 for i in range(7):
-                    user_input = str(input("Inroduzca {} :".format(i+1)))
-                    inputs.append(user_input)
-                    #Todos los checks
-                input[0]=persona.check_DNI(input[0])
-                input[1]=persona.check_nombre(input[1])
-                input[2]=persona.check_sexo(input[2])
-                input[3]=persona.check_fecha_de_nacimiento(input[3])
-                input[4]=persona.check_pais(input[4])
-                input[5]=empleado.checklegajo(input[5])
-                input[6]=empleado.checksector(input[6])
-                lista_empleado.append(empleado(inputs[0], inputs[1], inputs[2],inputs[3],inputs[4],inputs[5],inputs[6],inputs[7]))
+                    if i == 3:
+                        print("Ahora a la fecha de nacimiento.")
+                        listaComodin.append(validarFecha())    
+                    else:
+                        user_input = str(input("Inroduzca {} : ".format(i+1)))
+                        listaComodin.append(user_input)
+                listaComodin[0]=persona.check_DNI(listaComodin[0])
+                listaComodin[1]=persona.check_nombre(listaComodin[1])
+                listaComodin[2]=persona.check_sexo(listaComodin[2])
+                listaComodin[3]=persona.check_fecha_de_nacimiento(listaComodin[3])
+                listaComodin[4]=persona.check_pais(listaComodin[4])
+                listaComodin[5]=empleado.checklegajo(listaComodin[5])
+                listaComodin[6]=empleado.checksector(listaComodin[6])
+                lista_empleado.append(empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6]))
             if eleccion_metodo=='3':
                 first_attribute=input('Ingrese el DNI del empleado que desea eliminar: ')
                 posicion=lista_empleado.buscar(first_attribute)
@@ -71,16 +79,20 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             if eleccion_metodo=='1':
                 print(lista_avion)
             if eleccion_metodo=='2':
-                print('1)Nro serie   2)Modelo   3)Fecha alta  4)Vuelos actuales   5)Estado')
-                inputs=[]
-                for i in range(5):
-                    user_input = str(input("Inroduzca {} :".format(i+1)))
-                    inputs.append(user_input)
+                print('1)Nro serie   2)Modelo   3)Fecha alta  4)Estado')
+                listaComodin=[]
+                for i in range(4):
+                    if i == 2:
+                        print("Ahora a la fecha de alta.")
+                        listaComodin.append(validarFecha())    
+                    else:
+                        user_input = str(input("Inroduzca {} : ".format(i+1)))
+                        listaComodin.append(user_input)
                 #Todos los checks
-                inputs[0]=avion.check_nro_serie(inputs[0])
-                inputs[4]=avion.check_estado(inputs[4])
-                inputs[2]=validarFecha(inputs[2])  #Mirar esto
-                lista_avion.append(avion(inputs[0], inputs[1], inputs[2],inputs[3],inputs[4]))
+                listaComodin[0]=avion.check_nro_serie(listaComodin[0])
+                listaComodin[3]=avion.check_estado(listaComodin[3])
+                listaComodin[2]=persona.check_fecha_de_nacimiento(listaComodin[2])  #CAMBIAR NOMBRE AL METODO
+                lista_avion.append(avion(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3]))
             
             if eleccion_metodo=='3':
                 first_attribute=input('Ingrese el Nro serie del avion que desea eliminar: ')
@@ -99,38 +111,41 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             if eleccion_metodo=='1':
                 print(lista_vuelo)
             if eleccion_metodo=='2':
-                print('1)Nro vuelo   2)Hora   3)Aeropuerto salida  4)Aeropuerto llegada   5)Nro de serie avion   6)Piloto   7)Precio') #Ojo con lo del :avion
-                inputs=[]
-                for i in range(7):
-                    user_input = str(input("Inroduzca {} :".format(i+1)))
-                    inputs.append(user_input)
+                print('1)Nro vuelo  2)Aeropuerto salida  3)Aeropuerto llegada   4)Nro de serie del avion   5)Legajo del piloto   6)Precio')
+                listaComodin=[]
+                for i in range(6):
+                    user_input = str(input("Inroduzca {} : ".format(i+1)))
+                    listaComodin.append(user_input)
                     
                 #Todos los checks
-                inputs[0]=vuelo.check_nro_vuelo(inputs[0])
-                inputs[6]=vuelo.check_precio_vuelo(inputs[6])
-                inputs[5]=vuelo.check_piloto(inputs[5])
-                inputs[4]=vuelo.check_nro_serie(inputs[4]) #Esto es nuevo
-                lista_vuelo.append(vuelo(inputs[0], inputs[1], inputs[2],inputs[3],inputs[4],inputs[5],inputs[6]))
+                listaComodin[0]=vuelo.check_nro_vuelo(listaComodin[0])
+                listaComodin[5]=vuelo.check_precio_vuelo(listaComodin[5])
+                listaComodin[4]=vuelo.check_piloto(listaComodin[4])
+                listaComodin[3]=vuelo.check_nro_serie(listaComodin[3]) #Esto es nuevo
+                lista_vuelo.append(vuelo(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5]))
             if eleccion_metodo=='B':
                 menu_clase()
             
     if eleccion_clase=='5':
         while True:
-            print('1)Visualizar matriz   2)Agregar viaje     3)Eleminar viaje  B)Volver')
+            print('1)Visualizar matriz   2)Agregar viaje     3)Eliminar viaje  B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_viaje)
             if eleccion_metodo=='2':
-                print('1)Nro viaje   2)Nro vuelo   3)Fecha')
-                inputs=[]
+                print('1)Nro viaje   2)Nro vuelo    3)Nro serie   4)Fecha')
+                listaComodin=[]
                 for i in range(4):
-                    user_input = str(input("Inroduzca {} :".format(i+1)))
-                    inputs.append(user_input)
-                    #Todos los checks
-                input[0]=viaje.check_nro_viaje(input[0])   #HACERLA
-                input[1]=viaje.check_vuelo(input[1])
-                input[3]=validarFecha(input[3])
-                lista_reserva.append(reserva(inputs[0], inputs[1], inputs[2],inputs[3]))
+                    if i == 3:
+                        print("Ahora a la fecha del viaje.")
+                        listaComodin.append(validarFecha())    
+                    else:
+                        user_input = str(input("Inroduzca {} : ".format(i+1)))
+                        listaComodin.append(user_input)
+                #Todos los checks
+                #listaComodin[0]=viaje.check_nro_viaje(listaComodin[0])   #HACERLA
+                listaComodin[1]=viaje.check_vuelo(listaComodin[1])
+                lista_reserva.append(reserva(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3]))
             if eleccion_metodo=='3':
                 first_attribute=input('Ingrese el nro de viaje que desea eliminar: ')
                 posicion=lista_empleado.buscar(first_attribute)
@@ -144,34 +159,37 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             
     if eleccion_clase=='6':
         while True:
-            print('1)Visualizar matriz   2)Agregar reserva   3)Eliminar reserva     B)Volver')
+            print('1)Visualizar matriz   2)Agregar reserva   3)Eliminar reserva   B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_reserva)
             if eleccion_metodo==2:
-                print('1)Nro reserva   2)DNI cliente   3)L_Empleado  4)Nro viaje   5)Monto') #Ojo con lo del :avion
-                inputs=[]
-                for i in range(7):
+                print('1)Nro reserva   2)DNI cliente   3)Legajo Empleado  4)Nro viaje   5)Monto')
+                listaComodin=[]
+                for i in range(5):
                     user_input = str(input("Inroduzca {} :".format(i+1)))
-                    inputs.append(user_input)
-                    #Todos los checks
-                inputs[0]=reserva.check_nro_reserva(inputs[0])
-                inputs[1]=reserva.check_cliente(inputs[1],lista_persona)
-                inputs[2]=reserva.check_empleado(inputs[2],lista_empleado)
-                inputs[3]=reserva.check_viaje(inputs[3],lista_viaje)
-                inputs[4]=reserva.check_monto(inputs[4],...,lista_viaje,lista_vuelo) #ACA NO VA EL VIAJE CORREGIRLO
+                    listaComodin.append(user_input)
+                #Todos los checks
+                listaComodin[0]=reserva.check_nro_reserva(listaComodin[0])
+                listaComodin[1]=reserva.check_cliente(listaComodin[1],lista_persona)
+                listaComodin[2]=reserva.check_empleado(listaComodin[2],lista_empleado)
+                listaComodin[3]=reserva.check_viaje(listaComodin[3],lista_viaje)
+                listaComodin[4]=reserva.check_monto(listaComodin[4],listaComodin[3],lista_viaje,lista_vuelo)
                 
-                if viaje.agregarpasajero(inputs[3]):
-                    lista_reserva.append(reserva(inputs[0], inputs[1], inputs[2],inputs[3],inputs[4],inputs[5],inputs[6]))
+                if viaje.agregarpasajero(listaComodin[1], listaComodin[3],lista_viaje):
+                    lista_reserva.append(reserva(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4]))
                 else:
-                    print('Lamentablemente el vuelo esta lleno')
+                    print('Lamentablemente el vuelo está lleno')
             if eleccion_metodo=='3':
                 first_attribute=input('Ingrese el nro de la reserva que desea eliminar: ')
                 posicion=lista_empleado.buscar(first_attribute)
                 if posicion:
                     lista_empleado.pop(posicion)
+                    DNI = reserva.buscarPasajero(first_attribute, lista_reserva)
+                    viaje.eliminarpasajero(DNI)
                     print('La reserva con el numero {} se ha eliminado correctamente').format(first_attribute)
-                print('La reserva ingresada no se encuentra en la base de datos')
+                else:
+                    print('La reserva ingresada no se encuentra en la base de datos')
             if eleccion_metodo=='B':
                 menu_clase()
 
