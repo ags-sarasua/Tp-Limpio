@@ -4,44 +4,67 @@ import datetime
 def validarNum(tipoDato, min, max):
     ingresado = min - 1
     booleana = False
-    while(booleana == False or ingresado < min or ingresado > max):
+    while(booleana == False):
         try:
             ingresado = int(input("Ingrese "+ tipoDato +": "))
-            booleana = True    
+            if(ingresado < min or ingresado > max):
+                print("Error, el número debe estar entre {} y {}".format(min, max))
+            else:
+                return ingresado    
         except:
-            print("Fecha invalida")       
-    return ingresado
+            print("Error, tiene que ingresar un número. intente de nuevo")       
 
 #validarFecha recibe año, mes y día para convertirlo en un dato del tipo datetime 
 def validarFecha():
-    año = validarNum("año", 1900, 2030)
+    meses_31dias = [1, 3, 5, 7, 8, 10, 12]
+    meses_30dias = [4, 6, 9, 11]
+
+    año = validarNum("año", 1900, 2100)
     mes = validarNum("mes", 1, 12)
-    dia = validarNum("dia", 1, 28)
+
+    # Pedir el día (acotado según el mes)
+    if mes in meses_31dias:
+        dia = validarNum("dia", 1, 31)
+    elif mes in meses_30dias:
+        dia = validarNum("dia", 1, 30)
+    elif mes == 2:
+        if (año % 4 == 0 and año % 100 != 0) or (año % 400 == 0):
+            dia = validarNum("dia", 1, 29)
+        else:
+            dia = validarNum("dia", 1, 28)
     return(datetime.date(año, mes, dia))
 
 #login recibe un usuario y una contraseña para chequear si está en el sistema. 
-def login(usuario, contrasenia):
-    with open("hola.txt", 'r', encoding='utf-8') as archivo:
+def login(username, password):
+    with open("Usuarios.txt", 'r', encoding='utf-8') as archivo:
         listaUsuarios=[]
-        listacontraseñas=[]
+        passwordList=[]
         for linea in archivo:
             usu, contra = linea.strip().split(".")
             listaUsuarios.append(usu)
-            listacontraseñas.append(contra)
-        if usuario in listaUsuarios and contrasenia in listacontraseñas:
-            return True
-        while contrasenia not in listacontraseñas:
-            contrasenia = input("Ingrese la contraseña nuevamente: ")
-            if contrasenia in listacontraseñas:
-                return True
+            passwordList.append(contra)
+        while username not in listaUsuarios:
+            username = input("El usuario ingresado no existe. Intente de nuevo: ")
+        index = listaUsuarios.index(username)
+        while passwordList[index] != password:
+            password = input("Error, contraseña incorrecta. Ingresela nuevamente: ")
+        return True
 
 #registrarse escribe el archivo que tiene los usuarios y contraseñas para registrar un nuevo usuario
-def registrarse(usuario,contrasenia):
-    with open("hola.txt", 'a', encoding='utf-8') as archivo:
-            archivo.write(f"\n{usuario}.{contrasenia}")
-            print("Se creó el usuario")
-            return True
-
+def registrarse(username):
+    with open("Usuarios.txt", 'r', encoding='utf-8') as archivo:
+        listaUsuarios=[]
+        for linea in archivo:
+            usu = linea.strip().split(".")[0]
+            listaUsuarios.append(usu)
+        print(listaUsuarios)
+    while username in listaUsuarios:
+        username = input("Este nombre de usuario ya existe. Ingrese otro: ")
+    password = input("Ingrese una contraseña: ")
+    with open("Usuarios.txt", 'a', encoding='utf-8') as archivo:
+        archivo.write(f"\n{username}.{password}")
+        print("Se creó el usuario con éxito")
+        return True
 class persona:
     def __init__(self,DNI,nombre,sexo,fecha_de_nacimiento,pais):
         self.DNI=DNI
@@ -54,7 +77,7 @@ class persona:
     @staticmethod
     def check_DNI(DNI):
         while len(DNI)!=8 or DNI.isnumeric()==False:
-            print('El DNI esta mal ingresado')
+            print('Error, el DNI debe ser un número de 8 dígitos.')
             DNI=input("Ingrese el DNI nuevamente: ")    
         return DNI
 
@@ -71,7 +94,7 @@ class persona:
     def check_sexo(sexo):
         lista=["Femenino","Masculino","Otro"]
         while sexo not in lista:
-            print('El sexo ingresado no es valido')
+            print('El sexo ingresado no es valido, debe ser "Femenino", "Masculino" u "Otro".')
             sexo=input("Ingrese el sexo nuevamente:")
         return sexo
 
@@ -79,7 +102,7 @@ class persona:
     @staticmethod
     def check_fecha_de_nacimiento(fechaNacimiento):
         while fechaNacimiento > datetime.date.today():
-            print('la fecha ingresada no es valida')
+            print('La fecha ingresada no es valida, debe ser antes que el día de hoy')
             fechaNacimiento=validarFecha()
         return fechaNacimiento
       
@@ -167,7 +190,7 @@ class avion:
     @staticmethod
     def check_estado(estado):    
         while(estado not in ['En servicio','Fuera de servicio']):
-            estado=input('Ingrese nuevamente el estado del avion:    ')
+            estado=input('El estado del avion debe ser "En servicio" o "Fuera de servicio", Ingrese nuevamente:    ')
         return estado
     
 class vuelo:
@@ -212,7 +235,7 @@ class vuelo:
                 for serie in lista_nro_serie:
                     if serie.nro_serie==nro_serie:
                         return avion.check_nro_serie(nro_serie)
-                nro_serie = input("Error, el número de serie no existe. Intente de nuevo.")
+                nro_serie = input("Error, el número de serie no existe. Intente de nuevo: ")
        
 class viaje:
     capacidad=5
@@ -253,7 +276,7 @@ class viaje:
             for vuelo in lista_vuelo:
                 if vuelo.nro_vuelo == nro_vuelo:
                     return nro_vuelo
-            nro_vuelo = input("Error, el vuelo no existe. Intente de nuevo.")
+            nro_vuelo = input("Error, el vuelo no existe. Intente de nuevo: ")
 
     #Verifica si el avión está en servicio activo
     @staticmethod
@@ -288,7 +311,7 @@ class reserva:
     @staticmethod
     def check_nro_reserva(nro_reserva):
         while(nro_reserva.isnumeric()!=True or len(nro_reserva)!=4):
-            nro_reserva=input('Ingrese nuevamente su nro de factura:    ')
+            nro_reserva=input('Error, el nro. de factura tiene que ser un numero de 4 digitos. Ingrese nuevamente:    ')
         return nro_reserva
     
     #Verifica que el DNI  sea de un pasajero existente
@@ -298,7 +321,7 @@ class reserva:
             for pasajero in lista_pasajero:
                 if pasajero.DNI==DNI_pasajero:
                     return DNI_pasajero    
-            DNI_pasajero=input('Ingrese nuevamente su DNI:    ')
+            DNI_pasajero=input('Error, el DNI tiene que ser de un pasajero existente. Ingrese nuevamente:    ')
     
     #Verifica que el legajo del empleado sea de un empleado existente
     @staticmethod
@@ -307,7 +330,7 @@ class reserva:
             for empleado in lista_empleado:
                 if empleado.legajo==legajo_empleado:
                     return legajo_empleado
-            legajo_empleado=input('Ingrese nuevamente su Legajo:    ')
+            legajo_empleado=input('Error, no se encuentra empleado con ese legajo. Ingrese nuevamente:    ')
             
     #Verifica que el viaje ingresado en la reserva corresponda a uno existente
     @staticmethod
@@ -316,8 +339,7 @@ class reserva:
             for viaje in lista_viaje:
                 if viaje.nro_viaje==nro_viaje:
                     return nro_viaje
-            nro_viaje=input('Ingrese nuevamente el nro de viaje:    ')        
-        return nro_viaje
+            nro_viaje=input('Error, el viaje ingresado no corresponde con uno existente. Ingrese nuevamente:    ') 
     
     #Chequea que el monto ingresado en la reserva sea el correspondiente
     @staticmethod

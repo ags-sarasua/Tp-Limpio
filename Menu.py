@@ -1,5 +1,3 @@
-
-import datetime
 from listasenlazadas import *
 from Clases import *
 #from ListaObjetos import *
@@ -204,10 +202,11 @@ def menu():
         numero = input("Bienvenido a Aerolineas Mamba. Si se quiere registrar ingrese el número 1 si ya tiene una cuenta ingrese el número 2: ")
         while numero != "1" and numero != "2": numero = input("Ingrese una opción válida: ")
         if numero == "1":  
-            us, con = input("Ingrese un usuario y una contraseña: ").split()
-            if registrarse(us, con): print("Su usuario se creó con éxito")
+            us = input("Ingrese un usuario: ")
+            if registrarse(us): print("Su usuario se creó con éxito")
         if numero == "2":
-            us, con = input("Ingrese su usuario y contraseña: ").split()
+            us = input("Ingrese su usuario: ")
+            con = input("Ingrese una contraseña: ")
             if login(us, con):
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
