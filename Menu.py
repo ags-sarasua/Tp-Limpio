@@ -1,14 +1,14 @@
 from listasenlazadas import *
 from Clases import *
 from ListaObjetos import *
-
+import matplotlib.pyplot as mlp
 #----------------
 
 def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva):
     print('1)Persona    2)Empleado    3)Avion    4)Vuelo    5)Viaje      6)Reserva    B)Volver')
     eleccion_clase=input('Ingrese su eleccion: ')
     
-    if eleccion_clase=='1':
+    if eleccion_clase=='1': #enlazada
         while True:  #Para que una vez hagas algun metodo puedas volver a este lugar
             print('1)Visualizar lista   2)Agregar persona   B)Volver')
             
@@ -35,9 +35,9 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
     
-    if eleccion_clase=='2':
+    if eleccion_clase=='2': #fija
         while True:
-            print('1)Visualizar lista   2)Agregar empleado   3)Eliminar empleado   B)Volver')
+            print('1)Visualizar lista   2)Agregar empleado   3)Eliminar empleado  4)Graficar  B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_empleado)
@@ -64,10 +64,45 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 input_principal=input('Ingrese el DNI del empleado que desea eliminar: ')
                 if lista_viaje.pop(input_principal,"DNI"): print('El empleado con el DNI {} se ha eliminado correctamente'.format(input_principal))
                 else: print('El empleado ingresado no se encuentra en la base de datos')
+            
+            if eleccion_metodo=='4':
+                print('1)Cupo de genero   2)Distribuicion de roles')
+                eleccion_grafico=input('Ingrese su eleccion: ')
+                if eleccion_grafico=='1':
+                    hombre=0
+                    mujer=0
+                    otro=0
+                    for instancia in lista_empleado:
+                        if instancia.sexo=='Masculino':hombre+=1
+                        elif instancia.sexo=='Femenino': mujer+=1
+                        elif instancia.sexo=='Otro':otro+=1
+                    lista_cantidad=[hombre,mujer,otro]
+                    lista_sexos=['Masculino','Femenino','Otro']
+                    mlp.bar(lista_sexos,lista_cantidad,color= "#DA70D6")
+                    mlp.title("Cupo de genero")
+                    mlp.xlabel("Generos")
+                    mlp.ylabel("Cantidad")
+                    mlp.show()
+                if eleccion_grafico=='2':
+                    piloto=0
+                    tecnico=0
+                    administrativo=0
+                    for instancia in lista_empleado:
+                        if instancia.sector=='Administrativo':administrativo+=1
+                        elif instancia.sector=='Tecnico': tecnico+=1
+                        elif instancia.sector=='Piloto':piloto+=1
+                    lista_cantidad=[administrativo,tecnico,piloto]
+                    lista_roles=['Administrativo','Tecnico','Piloto']
+                    mlp.bar(lista_roles,lista_cantidad, color="#FF69B4",width=0.5)
+                    mlp.title("Distribuccion de roles")
+                    mlp.xlabel("Roles")
+                    mlp.ylabel("Cantidad")
+                    mlp.show()
+                    
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
-    if eleccion_clase=='3':
+    if eleccion_clase=='3': #fija
         while True:
             print('1)Visualizar lista   2)Agregar avion   3)Eliminar avion   B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
@@ -96,7 +131,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
             
-    if eleccion_clase=='4':
+    if eleccion_clase=='4': #enlazada
         while True:
             print('1)Visualizar lista   2)Agregar vuelo  B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
@@ -119,7 +154,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
             
-    if eleccion_clase=='5':
+    if eleccion_clase=='5': #enlazada
         while True:
             print('1)Visualizar lista   2)Agregar viaje     3)Eliminar viaje  B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
@@ -146,7 +181,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
             
-    if eleccion_clase=='6':
+    if eleccion_clase=='6': #enlazada 
         while True:
             print('1)Visualizar lista   2)Agregar reserva   3)Eliminar reserva   B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
@@ -176,6 +211,9 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
+    if eleccion_clase=='B': #enlazada
+        menu()
+        
 def menu():
     while True:
         numero = input("Bienvenido a Aerolineas Mamba. Si se quiere registrar ingrese el número 1 si ya tiene una cuenta ingrese el número 2: ")

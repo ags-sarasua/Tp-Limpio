@@ -57,7 +57,6 @@ def registrarse(username):
         for linea in archivo:
             usu = linea.strip().split(".")[0]
             listaUsuarios.append(usu)
-        print(listaUsuarios)
     while username in listaUsuarios:
         username = input("Este nombre de usuario ya existe. Ingrese otro: ")
     password = input("Ingrese una contraseña: ")
