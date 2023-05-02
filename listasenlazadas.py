@@ -62,24 +62,45 @@ class Lista():
                 nodo=nodo.prox
             nodo.prox=nodo.prox.prox
     
-    def buscar(self,first_attribute=None):
+    def buscar(self,caca,input_principal):
         nodo=Nodo()
         nodo=self.head
         contador=0
         posicion=None
-        while(nodo.prox!='None'):
-            if nodo.dato[0]==first_attribute:
+        while(nodo.prox!=None):
+            if nodo.dato.caca==input_principal:
                 posicion=contador
             contador+=1
             nodo=nodo.prox
+        
         return posicion
 
+
+###
+class Dog:
+    def __init__(self, name, breed, age):
+        self.name = name
+        self.breed = breed
+        self.age = age
+        
+dog1 = Dog("Fido", "Golden Retriever", 4)
+dog2 = Dog("Buddy", "Labrador Retriever", 6)
+dog3 = Dog("Max", "German Shepherd", 3)
+
+dog_list = Lista()
+dog_list.agregarInicio(Nodo(dog1))
+dog_list.append(Nodo(dog2))
+dog_list.append(Nodo(dog3))
+
+###
+
 if __name__=='__main__':
+    """
     lista=Lista()
     nodo1=Nodo(12)
     lista.agregarInicio(nodo1)
     nodo2=Nodo(21)
     lista.append(nodo2)
-    print(lista.buscar(0))
+    """
+    print(dog_list.buscar("name","Max"))
     #print(lista)
-    
