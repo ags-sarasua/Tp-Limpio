@@ -10,18 +10,6 @@ class Lista():
     def __init__(self):
         self.head=None
         self.len=0
-    """   
-    def __str__(self):
-        nodo=self.head
-        cadena=''
-        if(self.len==0):
-            return 'La lista es vacia'
-        else:
-            while(nodo!=None):
-                cadena+=str(nodo.dato)+'\t'
-                nodo=nodo.prox
-            return cadena    
-    """
     def __str__(self):
         nodo = Nodo()
         nodo=self.head
@@ -65,44 +53,15 @@ class Lista():
             if getattr(nodo.dato,atributo_principal)==input_principal:
                 return getattr(nodo.dato,atributo_a_buscar)
             nodo=nodo.prox
-            
-        '''
-        while(nodo.prox!=None):
+        return False
+
+    def actualizar(self,input_principal, atributo_principal,atributo_a_buscar,nuevo_input):
+        nodo=Nodo()
+        nodo=self.head
+        for i in range(self.len):
             if getattr(nodo.dato,atributo_principal)==input_principal:
-                posicion=contador
-                print('funciona')
-                return posicion
-            contador+=1
+                setattr(nodo.dato, atributo_a_buscar,nuevo_input)
+                return True
             nodo=nodo.prox
-        '''
-    
-###
-class Dog:
-    def __init__(self, name, breed, age):
-        self.name = name
-        self.breed = breed
-        self.age = age
+        return False
         
-dog1 = Dog("Fido", "Golden Retriever", 4)
-dog2 = Dog("Buddy", "Labrador Retriever", 6)
-dog3 = Dog("Max", "German Shepherd", 3)
-
-dog_list = Lista()
-dog_list.append(Nodo(dog1))
-dog_list.append(Nodo(dog2))
-dog_list.append(Nodo(dog3))
-
-###
-
-if __name__=='__main__':
-    lista=Lista()
-    nodo1=Nodo(12)
-    nodo2=Nodo(21)
-    lista.append(nodo2)
-    a=dog_list.pop("Max","name")
-    if a==True:
-        print('Banco') 
-    
-    print(dog_list.buscar("Max","name","age"))
-    #print(lista)
-    print(dog_list)

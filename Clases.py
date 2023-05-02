@@ -65,7 +65,7 @@ def registrarse(username):
         archivo.write(f"\n{username}.{password}")
         print("Se creó el usuario con éxito")
         return True
-class persona:
+class persona: 
     def __init__(self,DNI,nombre,sexo,fecha_de_nacimiento,pais):
         self.DNI=DNI
         self.nombre=nombre
