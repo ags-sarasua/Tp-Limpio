@@ -287,6 +287,13 @@ class viaje:
                 return False
             else:
                 return True 
+    
+    #Pide que el número de viaje sea de 4 dígitos
+    @staticmethod
+    def check_nro_viaje(nro_viaje):
+        while(nro_viaje.isnumeric()!=True or len(nro_viaje)!=4):
+            nro_reserva=input('Error, el nro. de viaje tiene que ser un numero de 4 digitos. Ingrese nuevamente:    ')
+        return nro_viaje
 
 class reserva: 
     def __init__(self,nro_reserva,DNI_cliente,legajo_empleado,nro_viaje,monto):
