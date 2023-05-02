@@ -2,6 +2,7 @@ import Clases
 
 import datetime
 from listasenlazadas import *
+import numpy as np
 
 #personas
 
@@ -31,33 +32,33 @@ lista_persona.append(Nodo(p9))
 lista_persona.append(Nodo(p10))
 
 #empleado
-lista_empleado=Lista()
+lista_empleado=[]
 
-e1=Clases.empleado('12775678', 'Juan Perez', 'Masculino', datetime.date(1990, 5, 3), 'Argentina', '1234', 'Administrativo')
-e2=Clases.empleado('87611321', 'María Gomez', 'Femenino', datetime.date(1995, 2, 15), 'Argentina', '5678', 'Piloto')
-e3=Clases.empleado('23422789', 'Pedro Rodriguez', 'Masculino', datetime.date(1985, 11, 20), 'España', '9012', 'Tecnico')
-e4=Clases.empleado('98733432', 'Ana Gonzalez', 'Femenino', datetime.date(1992, 7, 7), 'México', '3456', 'Administrativo')
-e5=Clases.empleado('34545890', 'Miguel Fernández', 'Masculino', datetime.date(1980, 3, 12), 'Argentina', '7890', 'Tecnico')
-e6=Clases.empleado('01255567', 'Lucia Martinez', 'Femenino', datetime.date(1998, 8, 18), 'Argentina', '2345', 'Piloto')
-e7=Clases.empleado('78966234', 'Gustavo Suarez', 'Masculino', datetime.date(1987, 9, 25), 'Uruguay', '3456', 'Administrativo')
-e8=Clases.empleado('45677901', 'Julia Fernández', 'Femenino', datetime.date(1991, 1, 1), 'Argentina', '1235', 'Piloto')
-e9=Clases.empleado('89088345', 'Andrés Romero', 'Masculino', datetime.date(1982, 6, 10), 'Colombia', '5679', 'Tecnico')
-e10=Clases.empleado('54399109', 'Liliana Díaz', 'Femenino', datetime.date(1993, 12, 24), 'Argentina', '9013', 'Administrativo')
+e1=Clases.empleado('12775678', 'Juan Perez', 'Masculino', datetime.date(1990, 5, 3).strftime('%d/%m/%Y'), 'Argentina', '1234', 'Administrativo')
+e2=Clases.empleado('87611321', 'María Gomez', 'Femenino', datetime.date(1995, 2, 15).strftime('%d/%m/%Y'), 'Argentina', '5678', 'Piloto')
+e3=Clases.empleado('23422789', 'Pedro Rodriguez', 'Masculino', datetime.date(1985, 11, 20).strftime('%d/%m/%Y'), 'España', '9012', 'Tecnico')
+e4=Clases.empleado('98733432', 'Ana Gonzalez', 'Femenino', datetime.date(1992, 7, 7).strftime('%d/%m/%Y'), 'México', '3456', 'Administrativo')
+e5=Clases.empleado('34545890', 'Miguel Fernández', 'Masculino', datetime.date(1980, 3, 12).strftime('%d/%m/%Y'), 'Argentina', '7890', 'Tecnico')
+e6=Clases.empleado('01255567', 'Lucia Martinez', 'Femenino', datetime.date(1998, 8, 18).strftime('%d/%m/%Y'), 'Argentina', '2345', 'Piloto')
+e7=Clases.empleado('78966234', 'Gustavo Suarez', 'Masculino', datetime.date(1987, 9, 25).strftime('%d/%m/%Y'), 'Uruguay', '3456', 'Administrativo')
+e8=Clases.empleado('45677901', 'Julia Fernández', 'Femenino', datetime.date(1991, 1, 1).strftime('%d/%m/%Y'), 'Argentina', '1235', 'Piloto')
+e9=Clases.empleado('89088345', 'Andrés Romero', 'Masculino', datetime.date(1982, 6, 10).strftime('%d/%m/%Y'), 'Colombia', '5679', 'Tecnico')
+e10=Clases.empleado('54399109', 'Liliana Díaz', 'Femenino', datetime.date(1993, 12, 24).strftime('%d/%m/%Y'), 'Argentina', '9013', 'Administrativo')
 
-lista_empleado.append(Nodo(e1))
-lista_empleado.append(Nodo(e2))
-lista_empleado.append(Nodo(e3))
-lista_empleado.append(Nodo(e4))
-lista_empleado.append(Nodo(e5))
-lista_empleado.append(Nodo(e6))
-lista_empleado.append(Nodo(e7))
-lista_empleado.append(Nodo(e8))
-lista_empleado.append(Nodo(e9))
-lista_empleado.append(Nodo(e10))
+lista_empleado.append(e1)
+lista_empleado.append(e2)
+lista_empleado.append(e3)
+lista_empleado.append(e4)
+lista_empleado.append(e5)
+lista_empleado.append(e6)
+lista_empleado.append(e7)
+lista_empleado.append(e8)
+lista_empleado.append(e9)
+lista_empleado.append(e1)
 
 #avion
 
-lista_avion=Lista()
+lista_avion=[]
 
 avion1 = Clases.avion('1234567890', "Boeing 747", "2022-01-01", "Fuera de servicio")
 avion2 = Clases.avion('2345678901', "Airbus A320", "2020-06-15", "En servicio")
@@ -70,16 +71,16 @@ avion8 = Clases.avion('8901234567', "Airbus A350", "2022-03-05","En servicio")
 avion9 = Clases.avion('9012345678', "Boeing 777", "2016-12-31","Fuera de servicio")
 avion10 = Clases.avion('1234567891', "Airbus A330", "2019-02-14","En servicio")
 
-lista_avion.append(Nodo(avion1))
-lista_avion.append(Nodo(avion2))
-lista_avion.append(Nodo(avion3))
-lista_avion.append(Nodo(avion4))
-lista_avion.append(Nodo(avion5))
-lista_avion.append(Nodo(avion6))
-lista_avion.append(Nodo(avion7))
-lista_avion.append(Nodo(avion8))
-lista_avion.append(Nodo(avion9))
-lista_avion.append(Nodo(avion10))
+lista_avion.append(avion1)
+lista_avion.append(avion2)
+lista_avion.append(avion3)
+lista_avion.append(avion4)
+lista_avion.append(avion5)
+lista_avion.append(avion6)
+lista_avion.append(avion7)
+lista_avion.append(avion8)
+lista_avion.append(avion9)
+lista_avion.append(avion10)
 
 #vuelos
 lista_vuelo=Lista()
