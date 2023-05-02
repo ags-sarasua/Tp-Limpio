@@ -45,8 +45,12 @@ class Lista():
     def pop(self,input_principal,atributo_principal):
         nodo=Nodo()
         nodo=self.head
-        for i in range(self.len):
-            if getattr(nodo.prox.dato,atributo_principal)==input_principal:
+        for i in range(self.len-1):
+            if i==0 and getattr(nodo.dato,atributo_principal)==input_principal:
+                self.head=nodo.prox
+                self.len-=1
+                return True
+            elif getattr(nodo.prox.dato,atributo_principal)==input_principal:
                 nodo.prox=nodo.prox.prox
                 print('AAA')
                 self.len-=1

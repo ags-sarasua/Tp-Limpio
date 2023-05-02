@@ -1,6 +1,6 @@
 from listasenlazadas import *
 from Clases import *
-#from ListaObjetos import *
+from ListaObjetos import *
 
 #----------------
 
@@ -61,7 +61,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 lista_empleado.append(Nodo(empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6])))
             if eleccion_metodo=='3':
                 input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
-                if lista_viaje.pop(input_principal,"DNI"): print('El empleado con el DNI {} se ha eliminado correctamente').format(input_principal)
+                if lista_viaje.pop(input_principal,"DNI"): print('El empleado con el DNI {} se ha eliminado correctamente'.format(input_principal))
                 else: print('El empleado ingresado no se encuentra en la base de datos')
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
@@ -90,7 +90,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             
             if eleccion_metodo=='3':
                 input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
-                if lista_avion.pop(input_principal,"nro_serie"): print('El avion con el nro de serie {} se ha eliminado correctamente').format(input_principal)
+                if lista_avion.pop(input_principal,"nro_serie"): print('El avion con el nro de serie {} se ha eliminado correctamente'.format(input_principal))
                 else: ('El numero de serie ingresado no se encuentra en la base de datos')
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
@@ -139,7 +139,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 lista_reserva.append(Nodo(reserva(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3])))
             if eleccion_metodo=='3':
                 input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
-                if lista_viaje.pop(input_principal,"nro_viaje"): print('El viaje con el nro {} se ha eliminado correctamente').format(input_principal)
+                if lista_viaje.pop(input_principal,"nro_viaje"): print('El viaje con el nro {} se ha eliminado correctamente'.format(input_principal))
                 else: print('El viaje ingresado no se encuentra en la base de datos')
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
@@ -169,16 +169,12 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     print('Lamentablemente el vuelo está lleno')
             if eleccion_metodo=='3':
                 input_principal=input('Ingrese la reserva que desea eliminar: ')
-                if lista_reserva.pop(input_principal,"nro_reserva"): print('La reserva nro {} se ha eliminado correctamente').format(input_principal)
+                if lista_reserva.pop(input_principal,"nro_reserva"): print('La reserva nro {} se ha eliminado correctamente'.format(input_principal))
                 else: print('El viaje ingresado no se encuentra en la base de datos')
+            if eleccion_metodo=='B':
+                menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
 def menu():
-    lista_persona=Lista()
-    lista_empleado=Lista()
-    lista_avion=Lista()
-    lista_vuelo=Lista()
-    lista_viaje=Lista()
-    lista_reserva=Lista()
     while True:
         numero = input("Bienvenido a Aerolineas Mamba. Si se quiere registrar ingrese el número 1 si ya tiene una cuenta ingrese el número 2: ")
         while numero != "1" and numero != "2": numero = input("Ingrese una opción válida: ")
