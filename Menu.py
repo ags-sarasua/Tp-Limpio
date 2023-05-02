@@ -52,6 +52,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         user_input = str(input("Inroduzca {} : ".format(i+1)))
                         listaComodin.append(Nodo(user_input))
                 listaComodin[0]=persona.check_DNI(listaComodin[0])
+                listaComodin[0]=persona.DNI_repetido(listaComodin[0],lista_persona)
                 listaComodin[1]=persona.check_nombre(listaComodin[1])
                 listaComodin[2]=persona.check_sexo(listaComodin[2])
                 listaComodin[3]=persona.check_fecha_de_nacimiento(listaComodin[3])
@@ -60,7 +61,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 listaComodin[6]=empleado.checksector(listaComodin[6])
                 lista_empleado.append(Nodo(empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6])))
             if eleccion_metodo=='3':
-                input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
+                input_principal=input('Ingrese el DNI del empleado que desea eliminar: ')
                 if lista_viaje.pop(input_principal,"DNI"): print('El empleado con el DNI {} se ha eliminado correctamente'.format(input_principal))
                 else: print('El empleado ingresado no se encuentra en la base de datos')
             if eleccion_metodo=='B':
@@ -113,6 +114,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 listaComodin[5]=vuelo.check_precio_vuelo(listaComodin[5])
                 listaComodin[4]=vuelo.check_piloto(listaComodin[4])
                 listaComodin[3]=vuelo.check_nro_serie(listaComodin[3])
+                listaComodin[3]=vuelo.check_nro_serie(listaComodin[3],lista_avion)
                 lista_vuelo.append(Nodo(vuelo(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5])))
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)

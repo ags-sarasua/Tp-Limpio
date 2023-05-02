@@ -64,4 +64,3 @@ class Lista():
                 return True
             nodo=nodo.prox
         return False
-        
