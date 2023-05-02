@@ -19,7 +19,7 @@ p8= Clases.persona("78901234", "Javier Ielim", "Masculino", datetime.date(1992, 
 p9= Clases.persona("89012345", "Carla Yema", "Femenino", datetime.date(1978, 9, 18), "Canadá")
 p10= Clases.persona("90123456", "Pablo Leuco", "Masculino", datetime.date(1980, 5, 29), "Australia")
 
-lista_persona.append(p1)
+lista_persona.append(Nodo(p1))
 lista_persona.append(p2)
 lista_persona.append(p3)
 lista_persona.append(p4)

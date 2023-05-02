@@ -10,15 +10,7 @@ class Lista():
     def __init__(self):
         self.head=None
         self.len=0
-        
-    def agregarInicio(self,nodo:Nodo):
-        if(self.len==0):
-            self.head=nodo
-        else:
-            nodo.prox=self.head #El puntero tiene toda la data del proximo
-            self.head=nodo
-        self.len+=1
-        
+    """   
     def __str__(self):
         nodo=self.head
         cadena=''
@@ -29,6 +21,15 @@ class Lista():
                 cadena+=str(nodo.dato)+'\t'
                 nodo=nodo.prox
             return cadena    
+    """
+    def __str__(self):
+        nodo = Nodo()
+        nodo=self.head
+        lista = []
+        while nodo is not None:
+            lista.append(str(nodo.dato.__dict__))
+            nodo = nodo.prox
+        return "\n".join(lista)
     
     def append(self,nodo:Nodo):
         if(self.len==0):
@@ -41,39 +42,26 @@ class Lista():
             nodomov.prox=nodo   #muy bueno
         self.len+=1
         
-    def pop(self,pos=None):
-        
-        if self.head is None:
-            return None
+    def pop(self,input_principal,atributo_principal):
         nodo=Nodo()
         nodo=self.head
-        if self.head is None:
-            return None
-        if pos==0:
-            self.head=nodo.prox
-            nodo=None
-        elif pos==None:
-            final=self.len-2  #ultimo nodo
-            for i in range(final):
-                nodo=nodo.prox
-            nodo.prox=None
-        else:
-            for i in  range(pos-1):
-                nodo=nodo.prox
-            nodo.prox=nodo.prox.prox
+        for i in range(self.len):
+            if getattr(nodo.prox.dato,atributo_principal)==input_principal:
+                nodo.prox=nodo.prox.prox
+                print('AAA')
+                self.len-=1
+                return True
+            nodo=nodo.prox
+        return False
     
-    def buscar(self,atributo_principal,input_principal):
+    def buscar(self,input_principal, atributo_principal,atributo_a_buscar):
         nodo=Nodo()
         nodo=self.head
-        contador=0
-        posicion=0
         for i in range(self.len):
             if getattr(nodo.dato,atributo_principal)==input_principal:
-                posicion=contador
-                print('funciona')
-                return posicion
-            contador+=1
+                return getattr(nodo.dato,atributo_a_buscar)
             nodo=nodo.prox
+            
         '''
         while(nodo.prox!=None):
             if getattr(nodo.dato,atributo_principal)==input_principal:
@@ -83,7 +71,7 @@ class Lista():
             contador+=1
             nodo=nodo.prox
         '''
-
+    
 ###
 class Dog:
     def __init__(self, name, breed, age):
@@ -96,19 +84,21 @@ dog2 = Dog("Buddy", "Labrador Retriever", 6)
 dog3 = Dog("Max", "German Shepherd", 3)
 
 dog_list = Lista()
-dog_list.agregarInicio(Nodo(dog1))
+dog_list.append(Nodo(dog1))
 dog_list.append(Nodo(dog2))
 dog_list.append(Nodo(dog3))
 
 ###
 
 if __name__=='__main__':
-    """
     lista=Lista()
     nodo1=Nodo(12)
-    lista.agregarInicio(nodo1)
     nodo2=Nodo(21)
     lista.append(nodo2)
-    """
-    print(dog_list.buscar("name","Max"))
+    a=dog_list.pop("Max","name")
+    if a==True:
+        print('Banco') 
+    
+    print(dog_list.buscar("Max","name","age"))
     #print(lista)
+    print(dog_list)
