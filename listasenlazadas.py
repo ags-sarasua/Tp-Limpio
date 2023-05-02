@@ -62,19 +62,27 @@ class Lista():
                 nodo=nodo.prox
             nodo.prox=nodo.prox.prox
     
-    def buscar(self,caca,input_principal):
+    def buscar(self,atributo_principal,input_principal):
         nodo=Nodo()
         nodo=self.head
         contador=0
-        posicion=None
-        while(nodo.prox!=None):
-            if nodo.dato.caca==input_principal:
+        posicion=0
+        for i in range(self.len):
+            if getattr(nodo.dato,atributo_principal)==input_principal:
                 posicion=contador
+                print('funciona')
+                return posicion
             contador+=1
             nodo=nodo.prox
-        
-        return posicion
-
+        '''
+        while(nodo.prox!=None):
+            if getattr(nodo.dato,atributo_principal)==input_principal:
+                posicion=contador
+                print('funciona')
+                return posicion
+            contador+=1
+            nodo=nodo.prox
+        '''
 
 ###
 class Dog:
