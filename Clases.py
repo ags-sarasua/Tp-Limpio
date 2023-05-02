@@ -65,7 +65,6 @@ def registrarse(username):
         archivo.write(f"\n{username}.{password}")
         print("Se creó el usuario con éxito")
         return True
-
 class persona:
     def __init__(self,DNI,nombre,sexo,fecha_de_nacimiento,pais):
         self.DNI=DNI
@@ -117,7 +116,7 @@ class persona:
         while pais not in paises:
            print('El pais ingresado no es valido')
            pais=input("Ingrese el pais nuevamente:") 
-        return pais 
+        return pais
 
 class empleado(persona):
     def __init__(self,DNI,nombre,sexo,fecha_de_nacimiento,pais,legajo,sector):
