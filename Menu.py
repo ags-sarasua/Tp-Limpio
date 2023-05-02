@@ -10,7 +10,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
     
     if eleccion_clase=='1':
         while True:  #Para que una vez hagas algun metodo puedas volver a este lugar
-            print('1)Visualizar matriz   2)Agregar persona   B)Volver')
+            print('1)Visualizar lista   2)Agregar persona   B)Volver')
             
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
@@ -37,7 +37,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
     
     if eleccion_clase=='2':
         while True:
-            print('1)Visualizar matriz   2)Agregar empleado   3)Eliminar empleado   B)Volver')
+            print('1)Visualizar lista   2)Agregar empleado   3)Eliminar empleado   B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_empleado)
@@ -72,7 +72,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
 
     if eleccion_clase=='3':
         while True:
-            print('1)Visualizar matriz   2)Agregar avion   3)Eliminar avion   B)Volver')
+            print('1)Visualizar lista   2)Agregar avion   3)Eliminar avion   B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_avion)
@@ -104,7 +104,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             
     if eleccion_clase=='4':
         while True:
-            print('1)Visualizar matriz   2)Agregar vuelo  B)Volver')
+            print('1)Visualizar lista   2)Agregar vuelo  B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_vuelo)
@@ -119,14 +119,14 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 listaComodin[0]=vuelo.check_nro_vuelo(listaComodin[0])
                 listaComodin[5]=vuelo.check_precio_vuelo(listaComodin[5])
                 listaComodin[4]=vuelo.check_piloto(listaComodin[4])
-                listaComodin[3]=vuelo.check_nro_serie(listaComodin[3]) #Esto es nuevo
+                listaComodin[3]=vuelo.check_nro_serie(listaComodin[3])
                 lista_vuelo.append(vuelo(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5]))
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
             
     if eleccion_clase=='5':
         while True:
-            print('1)Visualizar matriz   2)Agregar viaje     3)Eliminar viaje  B)Volver')
+            print('1)Visualizar lista   2)Agregar viaje     3)Eliminar viaje  B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_viaje)
@@ -141,7 +141,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         user_input = str(input("Inroduzca {} : ".format(i+1)))
                         listaComodin.append(user_input)
                 #Todos los checks
-                #listaComodin[0]=viaje.check_nro_viaje(listaComodin[0])   #HACERLA
+                listaComodin[0]=viaje.check_nro_viaje(listaComodin[0])
                 listaComodin[1]=viaje.check_vuelo(listaComodin[1], lista_vuelo)
                 lista_reserva.append(reserva(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3]))
             if eleccion_metodo=='3':
@@ -157,7 +157,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             
     if eleccion_clase=='6':
         while True:
-            print('1)Visualizar matriz   2)Agregar reserva   3)Eliminar reserva   B)Volver')
+            print('1)Visualizar lista   2)Agregar reserva   3)Eliminar reserva   B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_reserva)
