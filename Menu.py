@@ -78,7 +78,8 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         elif instancia.sexo=='Otro':otro+=1
                     lista_cantidad=[hombre,mujer,otro]
                     lista_sexos=['Masculino','Femenino','Otro']
-                    mlp.bar(lista_sexos,lista_cantidad,color= "#DA70D6")
+                    lista_colores=['#00CC99','#DA70D6','Grey']
+                    mlp.bar(lista_sexos,lista_cantidad,color=lista_colores)
                     mlp.title("Cupo de genero")
                     mlp.xlabel("Generos")
                     mlp.ylabel("Cantidad")
@@ -216,8 +217,20 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
         
 def menu():
     while True:
-        numero = input("Bienvenido a Aerolineas Mamba. Si se quiere registrar ingrese el número 1 si ya tiene una cuenta ingrese el número 2: ")
-        while numero != "1" and numero != "2": numero = input("Ingrese una opción válida: ")
+        print("\033[1mBienvenido a aerolineas Mamba\033[0m")
+        print("                                       |")
+        print("                                       |")
+        print("                                       |")
+        print("                                     .-'-.")
+        print("                                    ' ___ '")
+        print("                          ---------'  .-.  '---------")
+        print("          _________________________'  '-'  '_________________________")
+        print("           ''''''-|---|--/    \==][^',_m_,'^][==/    \--|---|-''''''")
+        print("                         \    /  ||/   H   \||  \    /")
+        print("                          '--'   OO   O|O   OO   '--'")
+
+        numero = input("\n Si se quiere registrar ingrese el número 1 si ya tiene una cuenta ingrese el número 2:   ")
+        while numero != "1" and numero != "2": numero = input("Ingrese una opción válida:   ")
         if numero == "1":  
             us = input("Ingrese un usuario: ")
             if registrarse(us): print("Su usuario se creó con éxito")
