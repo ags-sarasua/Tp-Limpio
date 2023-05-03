@@ -19,22 +19,29 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 if eleccion_metodo=='1':
                     print(lista_persona)
                 if eleccion_metodo=='2':
-                    print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais')
+                    print('1)DNI   2)Nombre   3)Apellido   4)Sexo  5)Fecha de nacimiento   6)Pais   7)Mail   8)Telefono')
+                    print('Aclaracion, el mail debe terminar en @gmail.com y el telefono de 10 digitos numericos')
                     listaComodin=[]
-                    listaMenu = ['DNI', 'Nombre', 'Sexo', 'Fecha de nacimiento', 'Pais']
-                    for i in range(5):
-                        if i == 3:
+                    listaMenu = ['DNI', 'Nombre', 'Apellido','Sexo', 'Fecha de nacimiento', 'Pais','Mail','Telefono']
+                    for i in range(8):
+                        if i == 4:
                             print("Ahora a la fecha de nacimiento.")
                             listaComodin.append(validarFecha())    
                         else:
                             user_input = str(input("Inroduzca {} : ".format(listaMenu[i])))
                             listaComodin.append(user_input)
                     listaComodin[0]=persona.check_DNI(listaComodin[0])
+                    listaComodin[0]=persona.check_existencia_DNI(listaComodin[0],lista_persona)
                     listaComodin[1]=persona.check_nombre(listaComodin[1])
-                    listaComodin[2]=persona.check_sexo(listaComodin[2])
-                    listaComodin[3]=persona.check_fecha(listaComodin[3])
-                    listaComodin[4]=persona.check_pais(listaComodin[4])
-                    lista_persona.append(Nodo(persona(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4])))
+                    listaComodin[2]=persona.check_nombre(listaComodin[2])
+                    listaComodin[3]=persona.check_sexo(listaComodin[3])
+                    listaComodin[4]=persona.check_fecha(listaComodin[4])
+                    listaComodin[5]=persona.check_pais(listaComodin[5])
+                    listaComodin[6]=persona.check_sintaxis_mail(listaComodin[6])
+                    listaComodin[6]=persona.check_existencia_mail(listaComodin[6],lista_persona)
+                    listaComodin[7]=persona.check_sintaxis_telefono(listaComodin[7])
+                    listaComodin[7]=persona.check_existencia_telefono(listaComodin[7],lista_persona)
+                    lista_persona.append(Nodo(persona(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6],listaComodin[7])))
 
                 if eleccion_metodo=='3':
                     print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais')
@@ -79,7 +86,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     for empleado in lista_empleado:
                         print(empleado)
                 if eleccion_metodo=='2':
-                    print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais    6)Legajo    7)Sector')
+                    print('1)DNI   2)Nombre 3)Apellido  4)Sexo  5)Fecha de nacimiento   6)Pais    7)Legajo    8)Sector')
                     listaComodin=[]
                     listaMenu = ['DNI', 'Nombre', 'Sexo', 'Fecha de nacimiento', 'Pais','Legajo','Sector']
                     for i in range(7):
@@ -90,14 +97,14 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             user_input = str(input("Inroduzca {} : ".format(listaMenu[i])))
                             listaComodin.append(user_input)
                     listaComodin[0]=persona.check_DNI(listaComodin[0])
-                    listaComodin[0]=persona.DNI_repetido(listaComodin[0],lista_persona)
+                    listaComodin[0]=Clases.empleado.DNI_repetido_empleado(listaComodin[0],lista_persona)
                     listaComodin[1]=persona.check_nombre(listaComodin[1])
-                    listaComodin[2]=persona.check_sexo(listaComodin[2])
-                    listaComodin[3]=persona.check_fecha(listaComodin[3])
-                    listaComodin[4]=persona.check_pais(listaComodin[4])
-                    listaComodin[5]=empleado.checklegajo(listaComodin[5], lista_empleado)
-                    listaComodin[6]=empleado.checksector(listaComodin[6])
-                    lista_empleado.append(Nodo(empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6])))
+                    listaComodin[3]=persona.check_sexo(listaComodin[3])
+                    listaComodin[4]=persona.check_fecha(listaComodin[4])
+                    listaComodin[5]=persona.check_pais(listaComodin[5])
+                    listaComodin[6]=Clases.empleado.checklegajo(listaComodin[6], lista_empleado)
+                    listaComodin[7]=Clases.empleado.checksector(listaComodin[7])
+                    lista_empleado.append(Nodo(empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6],listaComodin[7])))
 
                 if eleccion_metodo=='3':
                     input_principal=input('Ingrese el DNI del empleado que desea eliminar: ')
@@ -206,10 +213,11 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             user_input = str(input("Inroduzca {} : ".format(listaMenu[i])))
                             listaComodin.append(user_input)
                     #Todos los checks
-                    listaComodin[0]=avion.check_nro_serie(listaComodin[0])
-                    listaComodin[3]=avion.check_estado(listaComodin[3])
+                    listaComodin[0]=Clases.avion.check_sintaxis_nro_serie(listaComodin[0])
+                    listaComodin[0]=Clases.avion.check_sintaxis_nro_serie(listaComodin[0])
+                    listaComodin[3]=Clases.avion.check_estado(listaComodin[3])
                     listaComodin[2]=persona.check_fecha(listaComodin[2])  
-                    lista_avion.append(Nodo(avion(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3])))
+                    lista_avion.append(avion(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3]))
                 
                 if eleccion_metodo=='3':
                     input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
@@ -253,7 +261,8 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         listaComodin.append(user_input)
                         
                     #Todos los checks
-                    listaComodin[0]=vuelo.check_nro_vuelo(listaComodin[0])
+                    listaComodin[0]=vuelo.check_sintaxis_nro_vuelo(listaComodin[0])
+                    listaComodin[0]=vuelo.check_existencia_nro_vuelo(listaComodin[0])
                     listaComodin[4]=vuelo.check_precio_vuelo(listaComodin[4])
                     listaComodin[3]=vuelo.check_piloto(listaComodin[3], lista_empleado)
                     lista_vuelo.append(Nodo(vuelo(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4])))
@@ -305,7 +314,8 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             user_input = str(input("Inroduzca {} : ".format(listaMenu[i])))
                             listaComodin.append(user_input)
                     #Todos los checks
-                    listaComodin[0]=viaje.check_nro_viaje(listaComodin[0])
+                    listaComodin[0]=viaje.check_sintaxis_nro_viaje(listaComodin[0])
+                    listaComodin[0]=viaje.check_existencia_nro_viaje(listaComodin[0])
                     listaComodin[1]=viaje.check_vuelo(listaComodin[1], lista_vuelo)
                     listaComodin[2]=viaje.check_nro_serie(listaComodin[2],lista_avion)
                     listaComodin[2]=viaje.check_estado(listaComodin[2],lista_avion)
@@ -358,7 +368,8 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         user_input = str(input("Inroduzca {} :".format(listaMenu[i])))
                         listaComodin.append(user_input)
                     #Todos los checks
-                    listaComodin[0]=reserva.check_nro_reserva(listaComodin[0])
+                    listaComodin[0]=reserva.check_sintaxis_nro_reserva(listaComodin[0])
+                    listaComodin[0]=reserva.check_existencia_nro_reserva(listaComodin[0])
                     listaComodin[1]=reserva.check_cliente(listaComodin[1],lista_persona)
                     listaComodin[2]=reserva.check_empleado(listaComodin[2],lista_empleado)
                     listaComodin[3]=reserva.check_viaje(listaComodin[3],lista_viaje)

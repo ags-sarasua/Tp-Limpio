@@ -70,13 +70,17 @@ def registrarse(username):
     with open("Usuarios.txt", 'a', encoding='utf-8') as archivo:
         archivo.write(f"\n{username}.{password}")
         return True
+    
 class persona: 
-    def __init__(self,DNI,nombre,sexo,fecha_de_nacimiento,pais):
+    def __init__(self,DNI,nombre,apellido,sexo,fecha_de_nacimiento,pais,mail,telefono):
         self.DNI=DNI
         self.nombre=nombre
+        self.apellido=apellido
         self.sexo=sexo
         self.fecha_de_nacimiento=fecha_de_nacimiento
         self.pais=pais
+        self.mail=mail
+        self.telefono=telefono
         
     #chequear DNI: que sea un número de 8 digitos
     @staticmethod
@@ -90,8 +94,8 @@ class persona:
     @staticmethod
     def check_nombre(nombre):
         while nombre.isnumeric()==True:
-            print('Error, un nombre no tiene números.')
-            nombre=input("Ingrese el nombre nuevamente: ")
+            print('Error, tiene números.')
+            nombre=input("Ingrese nuevamente: ")
         return nombre
 
     #chequear sexo: Femenino, Masculino u Otro
@@ -122,17 +126,53 @@ class persona:
            print('El pais ingresado no es valido, debe tener su primer letra en mayúscula')
            pais=input("Ingrese el pais nuevamente: ") 
         return pais
+    
+    @staticmethod    
+    def check_existencia_DNI(DNI,lista_persona):        
+        while lista_persona.buscar(DNI,"DNI","DNI"):
+            DNI=input('Existe un usuario con su DNI, ingrese uno nuevo:   ')
+            persona.check_sintaxis_mail(DNI)
+            persona.check_existencia_mail(DNI,lista_persona)
+            return DNI
+        return DNI
+    
+    #check mail
     @staticmethod
-    def DNI_repetido(DNI,lista_persona):
-        while True:
-            if lista_persona.buscar(DNI,"DNI","DNI"):
-                DNI=input('Ingreso un DNI preexistente. Ingrese uno nuevo:  ')
-            else:
-                return DNI
+    def check_sintaxis_mail(mail):
+        while mail[-10:] !="@gmail.com" or len(mail)==10:
+            mail=input('El mail fue ingresado incorrectamente:  ')
+        return mail
+    
+    @staticmethod    
+    def check_existencia_mail(mail,lista_persona):        
+        while lista_persona.buscar(mail,"mail","mail"):
+            mail=input('Existe un usuario con su mail, ingrese uno nuevo:   ')
+            persona.check_sintaxis_mail(mail)
+            persona.check_existencia_mail(mail,lista_persona)
+            return mail
+        return mail
 
+    #check telefono
+    @staticmethod
+    def check_sintaxis_telefono(telefono):
+        while len(telefono)!=10 or telefono.isnumeric()==False:
+            print('Error, el telefono debe ser un número de 10 dígitos.')
+            telefono=input("Ingrese el telefono nuevamente:  ")    
+        return telefono
+
+    @staticmethod    
+    def check_existencia_telefono(telefono,lista_persona):        
+        while lista_persona.buscar(telefono,"telefono","telefono"):
+            telefono=input('Existe un usuario con su telefono, ingrese uno nuevo:   ')
+            persona.check_sintaxis_telefono(telefono)
+            persona.check_existencia_telefono(telefono,lista_persona)
+            return telefono
+        return telefono
+    
+    
 class empleado(persona):
-    def __init__(self,DNI,nombre,sexo,fecha_de_nacimiento,pais,legajo,sector):
-        super().__init__(DNI,nombre,sexo,fecha_de_nacimiento,pais)
+    def __init__(self,DNI,nombre,apellido,sexo,fecha_de_nacimiento,pais,legajo,sector):
+        super().__init__(DNI,nombre,apellido,sexo,fecha_de_nacimiento,pais,None,None)
         self.legajo=legajo
         self.sector=sector
     
@@ -149,6 +189,18 @@ class empleado(persona):
     def __str__(self):
         return "Empleado DNI {}, se llama {}, sexo {}, nació el {}, oriundo de {}, legajo {}, trabaja como {}".format(self.DNI,self.nombre,self.sexo,self.fecha_de_nacimiento,self.pais,self.legajo,self.sector)
 
+    @staticmethod
+    def DNI_repetido_empleado(DNI,lista_empleado):
+    
+        for objeto in lista_empleado:
+            if objeto.DNI==DNI:
+                DNI=input('Ingreso un DNI de un empleado preexistente. Ingrese uno nuevo:  ')
+                empleado.check_DNI(DNI)
+                empleado.DNI_repetido_empleado(DNI,lista_empleado)
+                return DNI
+        return DNI
+    
+    
     #chequear legajo: que sea un numero de 4 digitos y que no esté repetido 
     @staticmethod
     def checklegajo(legajo, lista_empleado):
@@ -196,9 +248,19 @@ class avion:
                 matriz_aviones.pop(i)
         return matriz_aviones
     
+    @staticmethod
+    def nroSerie_repetido_empleado(nro_serie,lista_avion):    
+        for objeto in lista_avion:
+            if objeto.nro_serie==nro_serie:
+                nro_serie=input('Ingreso un DNI de un empleado preexistente. Ingrese uno nuevo:  ')
+                avion.check_sintaxis_nro_serie(nro_serie)
+                avion.nroSerie_repetido_empleado(nro_serie,lista_avion)
+                return nro_serie
+        return nro_serie
+            
     #Chequea que el número de serie del avión sea un número de 10 dígitos
     @staticmethod
-    def check_nro_serie(nro_serie):
+    def check_sintaxis_nro_serie(nro_serie):
         while(len(nro_serie)!=10 or nro_serie.isnumeric() is not True ):
             nro_serie=input('Ingrese nuevamente el nro de serie:    ')
         return nro_serie
@@ -220,9 +282,18 @@ class vuelo:
 
     #Verifica que el vuelo sea un número de 4 dígitos
     @staticmethod
-    def check_nro_vuelo(nro_vuelo):
+    def check_sintaxis_nro_vuelo(nro_vuelo):
         while len(nro_vuelo)!=4 or not nro_vuelo.isnumeric():
             nro_vuelo = input("Error, debe ingresar un número de 4 dígitos: ")
+        return nro_vuelo
+    
+    @staticmethod
+    def check_existencia_nro_vuelo(nro_vuelo,lista_vuelo):        
+        while lista_vuelo.buscar(nro_vuelo,"nro_vuelo","nro_vuelo"):
+            nro_vuelo=input('Existe un vuelo con ese nro de vuelo , ingrese uno nuevo:   ')
+            vuelo.check_sintaxis_nro_vuelo(nro_vuelo)
+            vuelo.check_existencia_nro_vuelo(nro_vuelo,lista_vuelo)
+            return nro_vuelo
         return nro_vuelo
     
     #Chequea si el precio ingresado es un número positivo
@@ -319,9 +390,17 @@ class viaje:
     
     #Pide que el número de viaje sea de 4 dígitos
     @staticmethod
-    def check_nro_viaje(nro_viaje):
+    def check_sintaxis_nro_viaje(nro_viaje):
         while(nro_viaje.isnumeric()!=True or len(nro_viaje)!=4):
             nro_viaje=input('Error, el nro. de viaje tiene que ser un numero de 4 digitos. Ingrese nuevamente:    ')
+        return nro_viaje
+    @staticmethod
+    def check_existencia_nro_viaje(nro_viaje,lista_viaje):        
+        while lista_viaje.buscar(nro_viaje,"nro_viaje","nro_viaje"):
+            nro_viaje=input('Existe un viaje con ese nro de viaje , ingrese uno nuevo:   ')
+            viaje.check_sintaxis_nro_vuelo(nro_viaje)
+            viaje.check_existencia_nro_vuelo(nro_viaje,lista_viaje)
+            return nro_viaje
         return nro_viaje
 
 class reserva: 
@@ -331,14 +410,20 @@ class reserva:
         self.empleado=legajo_empleado
         self.nro_viaje=nro_viaje
         self.monto=monto
-        
-    
 
     #Pide que el nro de reserva sea un numérico de 4 dígitos
     @staticmethod
-    def check_nro_reserva(nro_reserva):
+    def check_sintaxis_nro_reserva(nro_reserva):
         while(nro_reserva.isnumeric()!=True or len(nro_reserva)!=4):
             nro_reserva=input('Error, el nro. de factura tiene que ser un numero de 4 digitos. Ingrese nuevamente:    ')
+        return nro_reserva
+    @staticmethod
+    def check_existencia_nro_reserva(nro_reserva,lista_reserva):        
+        while lista_reserva.buscar(nro_reserva,"nro_reserva","nro_reserva"):
+            nro_reserva=input('Existe una reserva con ese nro de reserva , ingrese uno nuevo:   ')
+            reserva.check_sintaxis_nro_reserva(nro_reserva)
+            reserva.check_existencia_nro_reserva(nro_reserva,lista_reserva)
+            return nro_reserva
         return nro_reserva
     
     #Verifica que el DNI  sea de un pasajero existente
