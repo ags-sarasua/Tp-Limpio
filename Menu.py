@@ -35,7 +35,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     listaComodin[4]=persona.check_pais(listaComodin[4])
                     lista_persona.append(Nodo(persona(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4])))
                     
-                if eleccion_metodo=='B':
+                if eleccion_metodo=='B' or eleccion_metodo =="b":
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
         
         if eleccion_clase=='2':
@@ -107,7 +107,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         mlp.ylabel("Cantidad")
                         mlp.show()
                                             
-                if eleccion_metodo=='B':
+                if eleccion_metodo=='B' or eleccion_metodo =="b":
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
         if eleccion_clase=='3':
@@ -138,7 +138,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
                     if lista_avion.pop(input_principal,"nro_serie"): print('El avion con el nro de serie {} se ha eliminado correctamente'.format(input_principal))
                     else: ('El numero de serie ingresado no se encuentra en la base de datos')
-                if eleccion_metodo=='B':
+                if eleccion_metodo=='B' or eleccion_metodo =="b":
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
                 
         if eleccion_clase=='4':
@@ -160,7 +160,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     listaComodin[4]=vuelo.check_precio_vuelo(listaComodin[4])
                     listaComodin[3]=vuelo.check_piloto(listaComodin[3], lista_empleado)
                     lista_vuelo.append(Nodo(vuelo(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4])))
-                if eleccion_metodo=='B':
+                if eleccion_metodo=='B' or eleccion_metodo =="b":
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
                 
         if eleccion_clase=='5':
@@ -183,13 +183,14 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     #Todos los checks
                     listaComodin[0]=viaje.check_nro_viaje(listaComodin[0])
                     listaComodin[1]=viaje.check_vuelo(listaComodin[1], lista_vuelo)
+                    listaComodin[2]=viaje.check_nro_serie(listaComodin[2],lista_avion)
                     listaComodin[2]=viaje.check_estado(listaComodin[2],lista_avion)
                     lista_viaje.append(Nodo(viaje(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3])))
                 if eleccion_metodo=='3':
                     input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
                     if lista_viaje.pop(input_principal,"nro_viaje"): print('El viaje con el nro {} se ha eliminado correctamente'.format(input_principal))
                     else: print('El viaje ingresado no se encuentra en la base de datos')
-                if eleccion_metodo=='B':
+                if eleccion_metodo=='B' or eleccion_metodo =="b":
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
                 
         if eleccion_clase=='6':
@@ -222,11 +223,11 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     if viaje.eliminar_pasajero(viaje_ingresado,dni_ingresado,lista_viaje): 
                         if lista_reserva.pop(input_principal,"nro_reserva"):
                             print('La reserva nro {} se ha eliminado correctamente'.format(input_principal))
-                if eleccion_metodo=='B':
+                if eleccion_metodo=='B' or eleccion_metodo =="b":
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
 
-        if eleccion_clase=='S':
+        if eleccion_clase=='S' or eleccion_clase =="s":
             menu()
 def menu():
     while True:

@@ -1,7 +1,13 @@
 import datetime
 
 #validarNum valida que un número ingresado por el usuario sea un número entre cierto rango pedido
-def validarNum(tipoDato, min, max):
+def validarNum(tipoDato: str, min: int, max: int) -> int:
+    """
+    min: cota inferior
+    max. cota superior
+
+    return: numero ingresado por el usuario en el intervalo {min, max}
+    """
     ingresado = min - 1
     booleana = False
     while(booleana == False):
@@ -204,11 +210,10 @@ class avion:
         return estado
     
 class vuelo:
-    def __init__(self,nro_vuelo,aeropuerto_salida,aeropuerto_llegada,nro_serie,legajo_piloto,precio):
+    def __init__(self,nro_vuelo,aeropuerto_salida,aeropuerto_llegada,legajo_piloto,precio):
         self.nro_vuelo=nro_vuelo
         self.aeropuerto_salida=aeropuerto_salida
         self.aeropuerto_llegada=aeropuerto_llegada
-        self.nro_serie=nro_serie
         self.legajo_piloto=legajo_piloto
         self.precio=precio
 
@@ -238,14 +243,7 @@ class vuelo:
                 break 
         return legajo_piloto
 
-    #Verifica que el número de serie del avión sea de uno existente
-    @staticmethod
-    def check_nro_serie(nro_serie,lista_avion):
-            while True:
-                for serie in lista_avion:
-                    if serie.nro_serie==nro_serie:
-                        return nro_serie
-                nro_serie = input("Error, el número de serie no existe. Intente de nuevo: ")
+
        
 class viaje:
     capacidad=5
@@ -266,9 +264,9 @@ class viaje:
                         nodo_actual.dato.pasajeros.append(pasajero)
                         nodo_actual.dato.contador_pasajeros+=1
                         return True
-                else:
-                    print("El pasajero ya está en la lista o el viaje ya esta lleno.")
-                    return False
+                    else:
+                        print("El pasajero ya está en la lista o el viaje ya esta lleno.")
+                        return False
             nodo_actual = nodo_actual.prox
         print("El número de viaje no fue encontrado.")
         return False
@@ -298,6 +296,15 @@ class viaje:
             else:
                 nro_vuelo = input("Error, el vuelo no existe. Intente de nuevo: ")
 
+
+        #Verifica que el número de serie del avión sea de uno existente
+    @staticmethod
+    def check_nro_serie(nro_serie,lista_avion):
+            while True:
+                for serie in lista_avion:
+                    if serie.nro_serie==nro_serie:
+                        return nro_serie
+                nro_serie = input("Error, el número de serie no existe. Intente de nuevo: ")
     #Verifica si el avión está en servicio activo
     @staticmethod
     def check_estado(nro_serie,lista_avion):
