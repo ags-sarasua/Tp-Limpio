@@ -44,12 +44,12 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     lista_persona.append(Nodo(persona(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6],listaComodin[7])))
 
                 if eleccion_metodo=='3':
-                    print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais')
+                    print('1)DNI   2)Nombre     3)Apellido   4)Sexo  5)Fecha de nacimiento   6)Pais     7)Mail    8)Telefono')
                     input_principal=input("ingrese el DNI de la persona a actualizar:    ")
                     input_principal=persona.check_DNI(input_principal)
                     eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
                     
-                    if eleccion_actualizar!="4":
+                    if eleccion_actualizar!="5":
                         nuevo_input=input("Ingrese el valor actualizado:    ")
 
                     
@@ -58,19 +58,29 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             lista_persona.actualizar_le(input_principal,"DNI","DNI",nuevo_input)
 
                         elif eleccion_actualizar=="2":
-                            nuevo_input=persona.check_nombre(nuevo_input)
-                            lista_persona.actualizar_le(input_principal,"DNI","nombre",nuevo_input) 
+                            nuevo_input=persona.check_nombre(nuevo_input,"nombre")
+                            lista_persona.actualizar_le(input_principal,"DNI","nombre",nuevo_input)
 
                         elif eleccion_actualizar=="3":
+                            nuevo_input=persona.check_nombre(nuevo_input,"apellido") 
+                            lista_persona.actualizar_le(input_principal,"DNI","apellido",nuevo_input)
+
+                        elif eleccion_actualizar=="4":
                             nuevo_input=persona.check_sexo(nuevo_input)
                             lista_persona.actualizar_le(input_principal,"DNI","sexo",nuevo_input) 
 
                         
-                        elif eleccion_actualizar=="5":
+                        elif eleccion_actualizar=="6":
                             nuevo_input=persona.check_pais(nuevo_input)
-                            lista_persona.actualizar_le(input_principal,"DNI","pais",nuevo_input)  
+                            lista_persona.actualizar_le(input_principal,"DNI","pais",nuevo_input) 
 
-                    elif eleccion_actualizar=="4":
+                        elif eleccion_actualizar=="7":
+                            nuevo_input=persona.check_sintaxis_mail(nuevo_input)
+
+                        elif eleccion_actualizar=="8":
+                            nuevo_input=persona.check_sintaxis_telefono 
+
+                    elif eleccion_actualizar=="5":
                             nuevo_input=validarFecha()
                             nuevo_input=persona.check_fecha_de_nacimiento(nuevo_input)
                             lista_persona.actualizar_le(input_principal,"DNI","fecha_de_nacimiento",nuevo_input)                     
@@ -127,13 +137,13 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         print('El empleado ingresado no se encuentra en la base de datos')
 
                 if eleccion_metodo=='4':
-                    print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais    6)Legajo    7)Sector')
+                    print('1)DNI   2)Nombre     3)Apellido   4)Sexo  5)Fecha de nacimiento   6)Pais    7)Legajo    8)Sector')
                     input_principal=input("ingrese el DNI del empleado a actualizar:    ")
                     input_principal=persona.check_DNI(input_principal)
                     eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
                     
 
-                    if eleccion_actualizar!="4":
+                    if eleccion_actualizar!="5":
                         nuevo_input=input("Ingrese el valor actualizado:    ")
                         if eleccion_actualizar=="1":
                             nuevo_input=persona.check_DNI(nuevo_input)
@@ -141,26 +151,30 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
 
                         elif eleccion_actualizar=="2":
                             nuevo_input=persona.check_nombre(nuevo_input)
-                            actualizar(lista_empleado,input_principal,"DNI","nombre",nuevo_input) 
+                            actualizar(lista_empleado,input_principal,"DNI","nombre",nuevo_input)
 
                         elif eleccion_actualizar=="3":
+                            nuevo_input=persona.check_nombre(nuevo_input,"apellido")
+                            actualizar(lista_empleado,input_principal,"DNI","apellido",nuevo_input)
+
+                        elif eleccion_actualizar=="4":
                             nuevo_input=persona.check_sexo(nuevo_input)
                             actualizar(lista_empleado,input_principal,"DNI","sexo",nuevo_input) 
 
                         
-                        elif eleccion_actualizar=="6":
+                        elif eleccion_actualizar=="7":
                             nuevo_input=Clases.empleado.checklegajo(nuevo_input)
                             actualizar(lista_empleado,input_principal,"DNI","legajo",nuevo_input) 
 
-                        elif eleccion_actualizar=="5":
+                        elif eleccion_actualizar=="6":
                             nuevo_input=persona.check_pais(nuevo_input)
                             actualizar(lista_empleado,input_principal,"DNI","pais",nuevo_input) 
 
-                        elif eleccion_actualizar=="7":
+                        elif eleccion_actualizar=="8":
                             nuevo_input=persona.check_sector(nuevo_input)
                             actualizar(lista_empleado,input_principal,"DNI""sector",nuevo_input) 
 
-                    elif eleccion_actualizar=="4":
+                    elif eleccion_actualizar=="5":
                             nuevo_input=validarFecha()
                             nuevo_input=persona.check_fecha_de_nacimiento(nuevo_input)
                             actualizar(lista_empleado,input_principal,"DNI","fecha_de_nacimiento",nuevo_input) 
