@@ -13,7 +13,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
         
         if eleccion_clase=='1':
             while True:  #Para que una vez hagas algun metodo puedas volver a este lugar
-                print('1)Visualizar lista   2)Agregar persona   3)Actualizar Persona  B)Volver')
+                print('1)Visualizar lista   2)Agregar persona   3)Actualizar Persona  4) Eliminar persona  B)Volver')
                 
                 eleccion_metodo=input('Ingrese su eleccion: ')
                 if eleccion_metodo=='1':
@@ -68,6 +68,14 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             nuevo_input=persona.check_fecha_de_nacimiento(nuevo_input)
                             lista_persona.actualizar_le(input_principal,"DNI","fecha_de_nacimiento",nuevo_input)                     
 
+                if eleccion_metodo=='4':
+                    DNI=input("Ingrese el DNI de la persona que quiere eliminar: ")
+                    if lista_persona.pop(DNI,"DNI"):
+                        print("Se eliminó correctamente la persona indicada")
+                    else:
+                        print("No se puedo eliminar correctamente la persona indicada")
+
+
                 if eleccion_metodo=='B' or eleccion_metodo =="b":
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
         
@@ -95,14 +103,20 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     listaComodin[2]=persona.check_sexo(listaComodin[2])
                     listaComodin[3]=persona.check_fecha(listaComodin[3])
                     listaComodin[4]=persona.check_pais(listaComodin[4])
-                    listaComodin[5]=empleado.checklegajo(listaComodin[5], lista_empleado)
-                    listaComodin[6]=empleado.checksector(listaComodin[6])
-                    lista_empleado.append(Nodo(empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6])))
+                    listaComodin[5]=Clases.empleado.checklegajo(listaComodin[5], lista_empleado)
+                    listaComodin[6]=Clases.empleado.checksector(listaComodin[6])
+                    lista_empleado.append(Clases.empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6]))
 
                 if eleccion_metodo=='3':
                     input_principal=input('Ingrese el DNI del empleado que desea eliminar: ')
-                    if lista_viaje.pop(input_principal,"DNI"): print('El empleado con el DNI {} se ha eliminado correctamente'.format(input_principal))
-                    else: print('El empleado ingresado no se encuentra en la base de datos')
+                    flag=False
+                    for empleado in lista_empleado:
+                        if input_principal==empleado.DNI:
+                            lista_empleado.remove(empleado)
+                            flag=True
+                            print('El empleado con el DNI {} se ha eliminado correctamente'.format(input_principal))
+                    if flag==False:
+                        print('El empleado ingresado no se encuentra en la base de datos')
 
                 if eleccion_metodo=='4':
                     print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais    6)Legajo    7)Sector')
@@ -206,15 +220,22 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             user_input = str(input("Inroduzca {} : ".format(listaMenu[i])))
                             listaComodin.append(user_input)
                     #Todos los checks
-                    listaComodin[0]=avion.check_nro_serie(listaComodin[0])
-                    listaComodin[3]=avion.check_estado(listaComodin[3])
+                    listaComodin[0]=Clases.avion.check_nro_serie(listaComodin[0])
+                    listaComodin[3]=Clases.avion.check_estado(listaComodin[3])
                     listaComodin[2]=persona.check_fecha(listaComodin[2])  
-                    lista_avion.append(Nodo(avion(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3])))
+                    lista_avion.append(Clases.avion(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3]))
                 
                 if eleccion_metodo=='3':
-                    input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
-                    if lista_avion.pop(input_principal,"nro_serie"): print('El avion con el nro de serie {} se ha eliminado correctamente'.format(input_principal))
-                    else: ('El numero de serie ingresado no se encuentra en la base de datos')
+                    input_principal=input('Ingrese el nro de serie del avión que desea eliminar: ')
+                    flag=False
+                    for avion in lista_avion:
+                        if input_principal==avion.nro_serie:
+                            lista_avion.remove(avion)
+                            flag=True
+                            print('El avión con el nro de serie {} se ha eliminado correctamente'.format(input_principal))
+                    if flag==False:
+                        print('El avión ingresado no se encuentra en la base de datos')                      
+                
                 if eleccion_metodo=='B' or eleccion_metodo =="b":
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
@@ -240,7 +261,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
 
         if eleccion_clase=='4':
             while True:
-                print('1)Visualizar lista   2)Agregar vuelo   3)Actualizar Vuelo   B)Volver')
+                print('1)Visualizar lista   2)Agregar vuelo   3)Actualizar Vuelo  4) Eliminar vuelo B)Volver')
                 eleccion_metodo=input('Ingrese su eleccion: ')
                 if eleccion_metodo=='1':
                     print(lista_vuelo)
@@ -284,9 +305,18 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         nuevo_input=vuelo.check_precio_vuelo(nuevo_input)
                         lista_vuelo.actualizar_le(input_principal,"nro_vuelo","precio",nuevo_input)                  
                 
+                if eleccion_metodo=='4':
+                    vuelo=input("Ingrese el número de vuelo que quiere eliminar: ")
+                    if lista_vuelo.pop(vuelo,"nro_vuelo"):
+                        print("Se eliminó correctamente el vuelo indicado")
+                    else:
+                        print("No se puedo eliminar correctamente el vuelo indicado")                
+
                 if eleccion_metodo=='B' or eleccion_metodo =="b":
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
                 
+
+
         if eleccion_clase=='5':
             while True:
                 print('1)Visualizar lista   2)Agregar viaje     3)Eliminar viaje  4)Actualizar Viaje    B)Volver')

@@ -149,6 +149,7 @@ class empleado(persona):
     def __str__(self):
         return "Empleado DNI {}, se llama {}, sexo {}, nació el {}, oriundo de {}, legajo {}, trabaja como {}".format(self.DNI,self.nombre,self.sexo,self.fecha_de_nacimiento,self.pais,self.legajo,self.sector)
 
+
     #chequear legajo: que sea un numero de 4 digitos y que no esté repetido 
     @staticmethod
     def checklegajo(legajo, lista_empleado):
