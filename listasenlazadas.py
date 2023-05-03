@@ -1,4 +1,6 @@
 
+
+print("modificado")
 class Nodo():
     def __init__(self,dato=None,prox=None):
         self.dato=dato

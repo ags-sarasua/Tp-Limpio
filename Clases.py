@@ -1,5 +1,6 @@
 import datetime
 
+print("modificado")
 #validarNum valida que un número ingresado por el usuario sea un número entre cierto rango pedido
 def validarNum(tipoDato: str, min: int, max: int) -> int:
     """
