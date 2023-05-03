@@ -313,7 +313,7 @@ class reserva:
     @staticmethod
     def check_cliente(DNI_pasajero,lista_pasajero):
         while(True):
-            if lista_pasajero(DNI_pasajero,"DNI","DNI"):
+            if lista_pasajero.buscar(DNI_pasajero,"DNI","DNI"):
                 return DNI_pasajero
             else: 
                 DNI_pasajero=input('Error, el DNI tiene que ser de un pasajero existente. Ingrese nuevamente:    ')
@@ -322,27 +322,29 @@ class reserva:
     @staticmethod
     def check_empleado(legajo_empleado,lista_empleado):
         while(True):
-            if lista_empleado(legajo_empleado,"Legajo","Legajo"):
-                return legajo_empleado
-            else: 
-                legajo_empleado=input('Error, no se encuentra empleado con ese legajo. Ingrese nuevamente:    ')
+            for empleado in lista_empleado:
+                if empleado.legajo==legajo_empleado:
+                    return legajo_empleado
+            legajo_empleado=input('Error, no se encuentra empleado con ese legajo. Ingrese nuevamente:    ')
             
     #Verifica que el viaje ingresado en la reserva corresponda a uno existente
     @staticmethod
     def check_viaje(nro_viaje,lista_viaje):
         while(True):
-            if lista_viaje(nro_viaje,"nro_viaje","nro_viaje"):
+            if lista_viaje.buscar(nro_viaje,"nro_viaje","nro_viaje"):
                 return nro_viaje
             else: 
                 nro_viaje=input('Error, el viaje ingresado no corresponde con uno existente. Ingrese nuevamente:    ') 
     
     #Chequea que el monto ingresado en la reserva sea el correspondiente
     @staticmethod
-    def check_monto(precio,nro_viaje,lista_vuelo):
-        if lista_vuelo.buscar(nro_viaje,"nro_viaje","precio")==precio:
-            return precio
-        else: 
-            precio=input('Monto incorrecto, ingrese nuevamente su monto:    ')
+    def check_monto(precio,nro_viaje,lista_viaje,lista_vuelo):
+        nro_vuelo=lista_viaje.buscar(nro_viaje,"nro_viaje","nro_vuelo")
+        while True:
+            if lista_vuelo.buscar(nro_vuelo,"nro_vuelo","precio")==precio:
+                return precio
+            else: 
+                precio=input('Monto incorrecto, ingrese nuevamente su monto:    ')
 
     
         

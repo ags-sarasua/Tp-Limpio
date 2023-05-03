@@ -208,9 +208,9 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     listaComodin[1]=reserva.check_cliente(listaComodin[1],lista_persona)
                     listaComodin[2]=reserva.check_empleado(listaComodin[2],lista_empleado)
                     listaComodin[3]=reserva.check_viaje(listaComodin[3],lista_viaje)
-                    listaComodin[4]=reserva.check_monto(listaComodin[4],listaComodin[3],lista_vuelo)
+                    listaComodin[4]=reserva.check_monto(listaComodin[4],listaComodin[3],lista_viaje, lista_vuelo)
                     
-                    if viaje.agregarpasajero(listaComodin[1], listaComodin[3],lista_viaje):
+                    if viaje.agregarpasajero(listaComodin[1], listaComodin[3],lista_viaje): #aca falta pasarle un argumento 
                         lista_reserva.append(Nodo(reserva(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4])))
                     else:
                         print('Lamentablemente el vuelo está lleno ')
