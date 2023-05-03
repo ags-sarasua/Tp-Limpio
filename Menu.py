@@ -32,8 +32,8 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             listaComodin.append(user_input)
                     listaComodin[0]=persona.check_DNI(listaComodin[0])
                     listaComodin[0]=persona.check_existencia_DNI(listaComodin[0],lista_persona)
-                    listaComodin[1]=persona.check_nombre(listaComodin[1])
-                    listaComodin[2]=persona.check_nombre(listaComodin[2])
+                    listaComodin[1]=persona.check_nombre(listaComodin[1],'nombre')
+                    listaComodin[2]=persona.check_nombre(listaComodin[2],'apellido')
                     listaComodin[3]=persona.check_sexo(listaComodin[3])
                     listaComodin[4]=persona.check_fecha(listaComodin[4])
                     listaComodin[5]=persona.check_pais(listaComodin[5])
@@ -96,23 +96,24 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 if eleccion_metodo=='2':
                     print('1)DNI   2)Nombre 3)Apellido  4)Sexo  5)Fecha de nacimiento   6)Pais    7)Legajo    8)Sector')
                     listaComodin=[]
-                    listaMenu = ['DNI', 'Nombre', 'Sexo', 'Fecha de nacimiento', 'Pais','Legajo','Sector']
-                    for i in range(7):
-                        if i == 3:
+                    listaMenu = ['DNI', 'Nombre','Apellido', 'Sexo', 'Fecha de nacimiento', 'Pais','Legajo','Sector']
+                    for i in range(8):
+                        if i == 4:
                             print("Ahora a la fecha de nacimiento.")
                             listaComodin.append(validarFecha())    
                         else:
                             user_input = str(input("Inroduzca {} : ".format(listaMenu[i])))
                             listaComodin.append(user_input)
                     listaComodin[0]=persona.check_DNI(listaComodin[0])
-                    listaComodin[0]=Clases.empleado.DNI_repetido_empleado(listaComodin[0],lista_persona)
-                    listaComodin[1]=persona.check_nombre(listaComodin[1])
-                    listaComodin[2]=persona.check_sexo(listaComodin[2])
-                    listaComodin[3]=persona.check_fecha(listaComodin[3])
-                    listaComodin[4]=persona.check_pais(listaComodin[4])
-                    listaComodin[5]=Clases.empleado.checklegajo(listaComodin[5], lista_empleado)
-                    listaComodin[6]=Clases.empleado.checksector(listaComodin[6])
-                    lista_empleado.append(Clases.empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6]))
+                    listaComodin[0]=Clases.empleado.DNI_repetido_empleado(listaComodin[0],lista_empleado)
+                    listaComodin[1]=persona.check_nombre(listaComodin[1],'nombre')
+                    listaComodin[2]=persona.check_nombre(listaComodin[2],'apellido')
+                    listaComodin[3]=persona.check_sexo(listaComodin[3])
+                    listaComodin[4]=persona.check_fecha(listaComodin[4])
+                    listaComodin[5]=persona.check_pais(listaComodin[5])
+                    listaComodin[6]=Clases.empleado.checklegajo(listaComodin[6], lista_empleado)
+                    listaComodin[7]=Clases.empleado.checksector(listaComodin[7])
+                    lista_empleado.append(Clases.empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6],listaComodin[7]))
 
                 if eleccion_metodo=='3':
                     input_principal=input('Ingrese el DNI del empleado que desea eliminar: ')

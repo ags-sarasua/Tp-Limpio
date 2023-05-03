@@ -92,9 +92,9 @@ class persona:
 
     #chequear nombre: que sea un string
     @staticmethod
-    def check_nombre(nombre):
+    def check_nombre(nombre,tipo):
         while nombre.isnumeric()==True:
-            print('Error, tiene números.')
+            print('El {} tiene números.'.format(tipo))
             nombre=input("Ingrese nuevamente: ")
         return nombre
 
@@ -191,7 +191,6 @@ class empleado(persona):
 
     @staticmethod
     def DNI_repetido_empleado(DNI,lista_empleado):
-    
         for objeto in lista_empleado:
             if objeto.DNI==DNI:
                 DNI=input('Ingreso un DNI de un empleado preexistente. Ingrese uno nuevo:  ')
