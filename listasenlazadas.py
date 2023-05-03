@@ -55,13 +55,16 @@ class Lista():
             nodo=nodo.prox
         return False
 
-    def actualizar(self,input_principal, atributo_principal,atributo_a_buscar,nuevo_input):
+    def actualizar_le(self,input_principal, atributo_principal,atributo_a_buscar,nuevo_input):
         nodo=Nodo()
         nodo=self.head
         for i in range(self.len):
+            
             if getattr(nodo.dato,atributo_principal)==input_principal:
                 setattr(nodo.dato, atributo_a_buscar,nuevo_input)
+        
                 return True
             nodo=nodo.prox
-        return False
         
+        return False
+

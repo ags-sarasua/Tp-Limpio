@@ -1,6 +1,7 @@
 from listasenlazadas import *
 from Clases import *
 from ListaObjetos import *
+from Actualizar import*
 
 #----------------
 
@@ -10,7 +11,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
     
     if eleccion_clase=='1':
         while True:  #Para que una vez hagas algun metodo puedas volver a este lugar
-            print('1)Visualizar lista   2)Agregar persona   B)Volver')
+            print('1)Visualizar lista   2)Agregar persona  3) Actualizar persona  B)Volver')
             
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
@@ -31,13 +32,45 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 listaComodin[3]=persona.check_fecha_de_nacimiento(listaComodin[3])
                 listaComodin[4]=persona.check_pais(listaComodin[4])
                 lista_persona.append(Nodo(persona(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4])))
+            if eleccion_metodo=='3':
+                print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais')
+                input_principal=input("ingrese el DNI de la persona a actualizar:    ")
+                input_principal=persona.check_DNI(input_principal)
+                eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
                 
+                if eleccion_actualizar!="4":
+                    nuevo_input=input("Ingrese el valor actualizado:    ")
+
+                
+                    if eleccion_actualizar=="1":
+                        nuevo_input=persona.check_DNI(nuevo_input)
+                        lista_persona.actualizar_le(input_principal,"DNI","DNI",nuevo_input)
+
+                    elif eleccion_actualizar=="2":
+                        nuevo_input=persona.check_nombre(nuevo_input)
+                        lista_persona.actualizar_le(input_principal,"DNI","nombre",nuevo_input) 
+
+                    elif eleccion_actualizar=="3":
+                        nuevo_input=persona.check_sexo(nuevo_input)
+                        lista_persona.actualizar_le(input_principal,"DNI","sexo",nuevo_input) 
+
+                    
+                    elif eleccion_actualizar=="5":
+                        nuevo_input=persona.check_pais(nuevo_input)
+                        lista_persona.actualizar_le(input_principal,"DNI","pais",nuevo_input)  
+
+                elif eleccion_actualizar=="4":
+                        nuevo_input=validarFecha()
+                        nuevo_input=persona.check_fecha_de_nacimiento(nuevo_input)
+                        lista_persona.actualizar_le(input_principal,"DNI","fecha_de_nacimiento",nuevo_input) 
+        
+
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
     
     if eleccion_clase=='2':
         while True:
-            print('1)Visualizar lista   2)Agregar empleado   3)Eliminar empleado   B)Volver')
+            print('1)Visualizar lista   2)Agregar empleado   3)Eliminar empleado 4) Actualizar empleado  B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_empleado)
@@ -63,12 +96,52 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
                 if lista_viaje.pop(input_principal,"DNI"): print('El empleado con el DNI {} se ha eliminado correctamente'.format(input_principal))
                 else: print('El empleado ingresado no se encuentra en la base de datos')
+            if eleccion_metodo=='4':
+                print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais    6)Legajo    7)Sector')
+                input_principal=input("ingrese el DNI del empleado a actualizar:    ")
+                input_principal=persona.check_DNI(input_principal)
+                eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                
+
+                if eleccion_actualizar!="4":
+                    nuevo_input=input("Ingrese el valor actualizado:    ")
+                    if eleccion_actualizar=="1":
+                        nuevo_input=persona.check_DNI(nuevo_input)
+                        actualizar(lista_empleado,input_principal,"DNI","DNI",nuevo_input)
+
+                    elif eleccion_actualizar=="2":
+                        nuevo_input=persona.check_nombre(nuevo_input)
+                        actualizar(lista_empleado,input_principal,"DNI","nombre",nuevo_input) 
+
+                    elif eleccion_actualizar=="3":
+                        nuevo_input=persona.check_sexo(nuevo_input)
+                        actualizar(lista_empleado,input_principal,"DNI","sexo",nuevo_input) 
+
+                    
+                    elif eleccion_actualizar=="6":
+                        nuevo_input=persona.checklegajo(nuevo_input)
+                        actualizar(lista_empleado,input_principal,"DNI","legajo",nuevo_input) 
+
+                    elif eleccion_actualizar=="5":
+                        nuevo_input=persona.check_pais(nuevo_input)
+                        actualizar(lista_empleado,input_principal,"DNI","pais",nuevo_input) 
+
+                    elif eleccion_actualizar=="7":
+                        nuevo_input=persona.check_sector(nuevo_input)
+                        actualizar(lista_empleado,input_principal,"DNI""sector",nuevo_input) 
+
+                elif eleccion_actualizar=="4":
+                        nuevo_input=validarFecha()
+                        nuevo_input=persona.check_fecha_de_nacimiento(nuevo_input)
+                        actualizar(lista_empleado,input_principal,"DNI","fecha_de_nacimiento",nuevo_input) 
+        
+                
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
     if eleccion_clase=='3':
         while True:
-            print('1)Visualizar lista   2)Agregar avion   3)Eliminar avion   B)Volver')
+            print('1)Visualizar lista   2)Agregar avion   3)Eliminar avion  4) Actualizar avion  B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_avion)
@@ -92,12 +165,35 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
                 if lista_avion.pop(input_principal,"nro_serie"): print('El avion con el nro de serie {} se ha eliminado correctamente'.format(input_principal))
                 else: ('El numero de serie ingresado no se encuentra en la base de datos')
+
+            if eleccion_metodo=='4':
+                print('1)Nro serie   2)Modelo   3)Fecha alta  4)Estado')
+                input_principal=input("ingrese el Nro de serie del avion a actualizar:    ")
+                input_principal=avion.check_nro_serie(input_principal)
+                eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                nuevo_input=input("Ingrese el valor actualizado:    ")
+
+               
+                if eleccion_actualizar=="1":
+                    nuevo_input=avion.check_nro_serie(nuevo_input)
+                    actualizar(lista_avion,input_principal,"nro_serie","nro_serie",nuevo_input)
+
+                if eleccion_actualizar=="2":
+                    nuevo_input=nuevo_input
+                    actualizar(lista_avion,input_principal,"nro_serie","modelo",nuevo_input) 
+
+                if eleccion_actualizar=="3":
+                    nuevo_input=validarFecha()
+                    actualizar(lista_avion,input_principal,"nro_serie","fecha_alta",nuevo_input) 
+
+                
+            
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
             
     if eleccion_clase=='4':
         while True:
-            print('1)Visualizar lista   2)Agregar vuelo  B)Volver')
+            print('1)Visualizar lista   2)Agregar vuelo   3)Actualizar vuelo   B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_vuelo)
@@ -114,12 +210,39 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 listaComodin[4]=vuelo.check_piloto(listaComodin[4])
                 listaComodin[3]=vuelo.check_nro_serie(listaComodin[3])
                 lista_vuelo.append(Nodo(vuelo(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5])))
+            if eleccion_metodo=='3':
+                print('1)Nro vuelo  2)Aeropuerto salida  3)Aeropuerto llegada    4)Legajo del piloto   5)Precio')
+                input_principal=input("ingrese el Nro de vuelo del vuelo a actualizar:    ")
+                input_principal=vuelo.check_nro_vuelo(input_principal)
+                eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                nuevo_input=input("Ingrese el valor actualizado:    ")
+
+               
+                if eleccion_actualizar=="1":
+                    nuevo_input=vuelo.check_nro_vuelo(nuevo_input)
+                    lista_vuelo.actualizar_le(input_principal,"nro_vuelo","nro_vuelo",nuevo_input)
+
+                if eleccion_actualizar=="2":
+                    lista_vuelo.actualizar_le(input_principal,"nro_vuelo","aeropuerto_salida",nuevo_input) 
+
+                if eleccion_actualizar=="3":
+                    lista_vuelo.actualizar_le(input_principal,"nro_vuelo","aeropuerto_llegada",nuevo_input) 
+
+                if eleccion_actualizar=="4":
+                    nuevo_input=vuelo.check_piloto(lista_empleado,nuevo_input) 
+                    lista_vuelo.actualizar_le(input_principal,"nro_vuelo","legajo_piloto",nuevo_input) 
+
+                if eleccion_actualizar=="5":
+                    nuevo_input=vuelo.check_precio_vuelo(nuevo_input)
+                    lista_vuelo.actualizar_le(input_principal,"nro_vuelo","precio",nuevo_input)  
+                    
+            
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
             
     if eleccion_clase=='5':
         while True:
-            print('1)Visualizar lista   2)Agregar viaje     3)Eliminar viaje  B)Volver')
+            print('1)Visualizar lista   2)Agregar viaje     3)Eliminar viaje  4)Actualizar viaje   B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_viaje)
@@ -141,12 +264,42 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 input_principal=input('Ingrese el nro de viaje que desea eliminar: ')
                 if lista_viaje.pop(input_principal,"nro_viaje"): print('El viaje con el nro {} se ha eliminado correctamente'.format(input_principal))
                 else: print('El viaje ingresado no se encuentra en la base de datos')
+
+            if eleccion_metodo=='4':
+                print('1)Nro viaje   2)Nro vuelo    3)Nro serie   4)Fecha')
+                input_principal=input("ingrese el Nro de viaje del viaje a actualizar:    ")
+                input_principal=viaje.check_nro_viaje(input_principal)
+                eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                
+                if eleccion_actualizar!="4":
+                    nuevo_input=input("Ingrese el valor actualizado:    ")
+
+               
+                    if eleccion_actualizar=="1":
+                        nuevo_input=viaje.check_nro_viaje(nuevo_input)
+                        lista_viaje.actualizar_le(input_principal,"nro_viaje","nro_viaje",nuevo_input)
+
+                    elif eleccion_actualizar=="2":
+                        nuevo_input=vuelo.check_nro_vuelo(nuevo_input)
+                        lista_viaje.actualizar_le(input_principal,"nro_viaje","nro_vuelo",nuevo_input) 
+
+                    elif eleccion_actualizar=="3":
+                        nuevo_input=avion.check_nro_serie(nuevo_input)
+                        lista_viaje.actualizar_le(input_principal,"nro_viaje","nro_serie",nuevo_input) 
+                
+                elif eleccion_actualizar=="4":
+                    nuevo_input=validarFecha
+                    lista_viaje.actualizar_le(input_principal,"nro_viaje","fecha",nuevo_input)  
+                        
+               
+            
+
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
             
     if eleccion_clase=='6':
         while True:
-            print('1)Visualizar lista   2)Agregar reserva   3)Eliminar reserva   B)Volver')
+            print('1)Visualizar lista   2)Agregar reserva   3)Eliminar reserva   4)Actualizar reserva  B)Volver')
             eleccion_metodo=input('Ingrese su eleccion: ')
             if eleccion_metodo=='1':
                 print(lista_reserva)
@@ -171,6 +324,36 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 input_principal=input('Ingrese la reserva que desea eliminar: ')
                 if lista_reserva.pop(input_principal,"nro_reserva"): print('La reserva nro {} se ha eliminado correctamente'.format(input_principal))
                 else: print('El viaje ingresado no se encuentra en la base de datos')
+            if eleccion_metodo=='4':
+                print('1)Nro reserva   2)DNI cliente   3)Legajo Empleado  4)Nro viaje   5)Monto')
+                input_principal=input("ingrese el Nro de reserva de la reserva a actualizar:    ")
+                input_principal=reserva.check_nro_reserva(input_principal)
+                eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                nuevo_input=input("Ingrese el valor actualizado:    ")
+
+               
+                if eleccion_actualizar=="1":
+                    nuevo_input=reserva.check_nro_reserva(nuevo_input)
+                    lista_reserva.actualizar_le(input_principal,"nro_reserva","nro_reserva",nuevo_input)
+
+                if eleccion_actualizar=="2":
+                    nuevo_input=persona.check_DNI(nuevo_input)
+                    lista_reserva.actualizar_le(input_principal,"nro_reserva","DNI_cliente",nuevo_input) 
+
+                if eleccion_actualizar=="3":
+                    nuevo_input=empleado.checklegajo(nuevo_input)
+                    lista_reserva.actualizar_le(input_principal,"nro_reserva","legajo_empleado",nuevo_input) 
+
+                if eleccion_actualizar=="4":
+                    nuevo_input=viaje.check_nro_viaje(nuevo_input)
+                    lista_reserva.actualizar_le(input_principal,"nro_reserva","nro_viaje",nuevo_input) 
+
+                if eleccion_actualizar=="5":
+                    nuevo_input=reserva.check_monto(nuevo_input)
+                    lista_reserva.actualizar_le(input_principal,"nro_reserva","monto",nuevo_input)  
+                
+            
+
             if eleccion_metodo=='B':
                 menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
