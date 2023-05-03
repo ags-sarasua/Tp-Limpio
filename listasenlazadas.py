@@ -1,6 +1,4 @@
 
-
-print("modificado")
 class Nodo():
     def __init__(self,dato=None,prox=None):
         self.dato=dato
@@ -32,7 +30,7 @@ class Lista():
             nodomov.prox=nodo   #muy bueno
         self.len+=1
         
-    def pop(self,input_principal,atributo_principal):
+    def pop(self,input_principal,atributo_principal):  #INPUT PRINCIPAL: VARIABLE QUE INGRESA EL USUARIO   ATRIBUTO_PRINCIPAL "DNI"
         nodo=Nodo()
         nodo=self.head
         for i in range(self.len-1):
