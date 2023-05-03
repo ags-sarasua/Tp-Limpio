@@ -2,7 +2,6 @@ import Clases
 
 import datetime
 from listasenlazadas import *
-import numpy as np
 
 #Este archivo tiene instancias de objetos por defecto
 

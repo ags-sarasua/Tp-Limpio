@@ -1,7 +1,7 @@
 from listasenlazadas import *
 from Clases import *
 from ListaObjetos import *
-
+import matplotlib.pyplot as mlp
 #----------------
 
 def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva):
@@ -40,7 +40,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
         
         if eleccion_clase=='2':
             while True:
-                print('1)Visualizar lista   2)Agregar empleado   3)Eliminar empleado   B)Volver')
+                print('1)Visualizar lista   2)Agregar empleado   3)Eliminar empleado    4)Graficar   B)Volver')
                 eleccion_metodo=input('Ingrese su eleccion: ')
                 if eleccion_metodo=='1':
                     print(lista_empleado)
@@ -64,10 +64,48 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     listaComodin[5]=empleado.checklegajo(listaComodin[5], lista_empleado)
                     listaComodin[6]=empleado.checksector(listaComodin[6])
                     lista_empleado.append(Nodo(empleado(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4],listaComodin[5],listaComodin[6])))
+
                 if eleccion_metodo=='3':
                     input_principal=input('Ingrese el DNI del empleado que desea eliminar: ')
                     if lista_viaje.pop(input_principal,"DNI"): print('El empleado con el DNI {} se ha eliminado correctamente'.format(input_principal))
                     else: print('El empleado ingresado no se encuentra en la base de datos')
+
+                if eleccion_metodo=='4':
+                    print('1)Cupo de genero   2)Distribuicion de roles')
+                    eleccion_grafico=input('Ingrese su eleccion: ')
+                    if eleccion_grafico=='1':
+                        hombre=0
+                        mujer=0
+                        otro=0
+                        for instancia in lista_empleado:
+                            if instancia.sexo=='Masculino':hombre+=1
+                            elif instancia.sexo=='Femenino': mujer+=1
+                            elif instancia.sexo=='Otro':otro+=1
+                        lista_cantidad=[hombre,mujer,otro]
+                        lista_sexos=['Masculino','Femenino','Otro']
+                        lista_colores=['#00CC99','#DA70D6','Grey']
+                        mlp.bar(lista_sexos,lista_cantidad,color=lista_colores)
+                        mlp.title("Cupo de genero")
+                        mlp.xlabel("Generos")
+                        mlp.ylabel("Cantidad")
+                        mlp.show()
+
+                    if eleccion_grafico=='2':
+                        piloto=0
+                        tecnico=0
+                        administrativo=0
+                        for instancia in lista_empleado:
+                            if instancia.sector=='Administrativo':administrativo+=1
+                            elif instancia.sector=='Tecnico': tecnico+=1
+                            elif instancia.sector=='Piloto':piloto+=1
+                        lista_cantidad=[administrativo,tecnico,piloto]
+                        lista_roles=['Administrativo','Tecnico','Piloto']
+                        mlp.bar(lista_roles,lista_cantidad, color="#FF69B4",width=0.5)
+                        mlp.title("Distribuccion de roles")
+                        mlp.xlabel("Roles")
+                        mlp.ylabel("Cantidad")
+                        mlp.show()
+                                            
                 if eleccion_metodo=='B':
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
@@ -188,8 +226,20 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
             menu()
 def menu():
     while True:
-        numero = input("Bienvenido a Aerolineas Mamba. Si se quiere registrar ingrese el número 1 si ya tiene una cuenta ingrese el número 2: ")
-        while numero != "1" and numero != "2": numero = input("Ingrese una opción válida: ")
+        print("\033[1mBienvenido a aerolineas Mamba\033[0m")
+        print("                                       |")
+        print("                                       |")
+        print("                                       |")
+        print("                                     .-'-.")
+        print("                                    ' ___ '")
+        print("                          ---------'  .-.  '---------")
+        print("          _________________________'  '-'  '_________________________")
+        print("           ''''''-|---|--/    \==][^',_m_,'^][==/    \--|---|-''''''")
+        print("                         \    /  ||/   H   \||  \    /")
+        print("                          '--'   OO   O|O   OO   '--'")
+
+        numero = input("\n Si se quiere registrar ingrese el número 1 si ya tiene una cuenta ingrese el número 2:   ")
+        while numero != "1" and numero != "2": numero = input("Ingrese una opción válida:   ")
         if numero == "1":  
             us = input("Ingrese un usuario: ")
             if registrarse(us): print("Su usuario se creó con éxito")
