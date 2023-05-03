@@ -1,7 +1,13 @@
 import datetime
 
 #validarNum valida que un número ingresado por el usuario sea un número entre cierto rango pedido
-def validarNum(tipoDato, min, max):
+def validarNum(tipoDato: str, min: int, max: int) -> int:
+    """
+    min: cota inferior
+    max. cota superior
+
+    return: numero ingresado por el usuario en el intervalo {min, max}
+    """
     ingresado = min - 1
     booleana = False
     while(booleana == False):
@@ -57,13 +63,11 @@ def registrarse(username):
         for linea in archivo:
             usu = linea.strip().split(".")[0]
             listaUsuarios.append(usu)
-        print(listaUsuarios)
     while username in listaUsuarios:
         username = input("Este nombre de usuario ya existe. Ingrese otro: ")
     password = input("Ingrese una contraseña: ")
     with open("Usuarios.txt", 'a', encoding='utf-8') as archivo:
         archivo.write(f"\n{username}.{password}")
-        print("Se creó el usuario con éxito")
         return True
 class persona: 
     def __init__(self,DNI,nombre,sexo,fecha_de_nacimiento,pais):
@@ -100,11 +104,11 @@ class persona:
 
     #chequear fechaNacimiento: datetime y que sea mas chica que la fecha de hoy
     @staticmethod
-    def check_fecha_de_nacimiento(fechaNacimiento):
-        while fechaNacimiento > datetime.date.today():
+    def check_fecha(fecha):
+        while fecha > datetime.date.today():
             print('La fecha ingresada no es valida, debe ser antes que el día de hoy')
-            fechaNacimiento=validarFecha()
-        return fechaNacimiento
+            fecha=validarFecha()
+        return fecha
       
     #chequear pais: string y que pertenezca a un pais real del archivo correspondiente
     @staticmethod
@@ -114,9 +118,16 @@ class persona:
         archivo.close()
 
         while pais not in paises:
-           print('El pais ingresado no es valido')
-           pais=input("Ingrese el pais nuevamente:") 
+           print('El pais ingresado no es valido, debe tener su primer letra en mayúscula')
+           pais=input("Ingrese el pais nuevamente: ") 
         return pais
+    @staticmethod
+    def DNI_repetido(DNI,lista_persona):
+        while True:
+            if lista_persona.buscar(DNI,"DNI","DNI"):
+                DNI=input('Ingreso un DNI preexistente. Ingrese uno nuevo:  ')
+            else:
+                return DNI
 
 class empleado(persona):
     def __init__(self,DNI,nombre,sexo,fecha_de_nacimiento,pais,legajo,sector):
@@ -133,6 +144,9 @@ class empleado(persona):
             if empleado.DNI == DNI and (indice-1) < len(lista_empleado) and indice >= 1:
                 lista_empleado[indice-1] = PorCual
         return lista_empleado
+
+    def __str__(self):
+        return "Empleado DNI {}, se llama {}, sexo {}, nació el {}, oriundo de {}, legajo {}, trabaja como {}".format(self.DNI,self.nombre,self.sexo,self.fecha_de_nacimiento,self.pais,self.legajo,self.sector)
 
     #chequear legajo: que sea un numero de 4 digitos y que no esté repetido 
     @staticmethod
@@ -170,7 +184,9 @@ class avion:
         self.modelo=modelo
         self.fecha_alta=fecha_alta
         self.estado=estado
-        print('Se creo bien')
+    
+    def __str__(self):
+        return 'Nro de serie: {}, modelo: {}, fecha de alta: {}, estado: {}'. format(self.nro_serie,self.modelo,self.modelo,self.fecha_alta,self.estado)
     
     #dado un número de serie, elimina la instancia de la lista de aviones
     def eliminarAvion(nro_serie,matriz_aviones):
@@ -194,11 +210,10 @@ class avion:
         return estado
     
 class vuelo:
-    def __init__(self,nro_vuelo,aeropuerto_salida,aeropuerto_llegada,nro_serie,legajo_piloto,precio):
+    def __init__(self,nro_vuelo,aeropuerto_salida,aeropuerto_llegada,legajo_piloto,precio):
         self.nro_vuelo=nro_vuelo
         self.aeropuerto_salida=aeropuerto_salida
         self.aeropuerto_llegada=aeropuerto_llegada
-        self.nro_serie=nro_serie
         self.legajo_piloto=legajo_piloto
         self.precio=precio
 
@@ -228,14 +243,7 @@ class vuelo:
                 break 
         return legajo_piloto
 
-    #Verifica que el número de serie del avión sea de uno existente
-    @staticmethod
-    def check_nro_serie(nro_serie,lista_nro_serie):
-            while True:
-                for serie in lista_nro_serie:
-                    if serie.nro_serie==nro_serie:
-                        return avion.check_nro_serie(nro_serie)
-                nro_serie = input("Error, el número de serie no existe. Intente de nuevo: ")
+
        
 class viaje:
     capacidad=5
@@ -247,51 +255,72 @@ class viaje:
         self.pasajeros=[]
         self.contador_pasajeros = 0
     
-    def eliminarViaje(nro_viaje,lista_viaje):
-        for viaje in lista_viaje:
-            if viaje.nro_viaje==nro_viaje:
-                lista_viaje.pop(viaje)
-        return lista_viaje
-    
-    def agregarpasajero(self, nroViaje, pasajero, listaViaje):
-        for viaje in listaViaje:
-            if viaje.nro_viaje == nroViaje:
-                if self.contador_pasajeros < viaje.capacidad :
-                    self.pasajeros.append(pasajero)
-                    self.contador_pasajeros+=1
-                    return True
+    def agregar_pasajero(nro_viaje, pasajero, lista_viaje):
+        nodo_actual = lista_viaje.head
+        while nodo_actual is not None:
+            if nodo_actual.dato.nro_viaje == nro_viaje:
+                if pasajero not in nodo_actual.dato.pasajeros:
+                    if len(nodo_actual.dato.pasajeros)<5:
+                        nodo_actual.dato.pasajeros.append(pasajero)
+                        nodo_actual.dato.contador_pasajeros+=1
+                        return True
+                    else:
+                        print("El pasajero ya está en la lista o el viaje ya esta lleno.")
+                        return False
+            nodo_actual = nodo_actual.prox
+        print("El número de viaje no fue encontrado.")
+        return False
+    def eliminar_pasajero(nro_viaje, pasajero, lista_viaje):
+        nodo_actual = lista_viaje.head
+        while nodo_actual is not None:
+            if nodo_actual.dato.nro_viaje == nro_viaje:
+                if pasajero in nodo_actual.dato.pasajeros:
+                        nodo_actual.dato.pasajeros.remove(pasajero)
+                        nodo_actual.dato.contador_pasajeros-=1
+                        return True
                 else:
+                    print("El pasajero no está en el vuelo indicado")
                     return False
+            nodo_actual = nodo_actual.prox
+        print("El número de viaje no fue encontrado.")
+        return False
 
-    def eliminarpasajero(self,pasajero):
-        for i in self.pasajeros:
-            if i==pasajero:
-                self.pasajeros.pop(pasajero)
-                self.contador_pasajeros-=1
+
 
     #Chequea que el vuelo existe en la clase Vuelo
     @staticmethod
     def check_vuelo(nro_vuelo,lista_vuelo):
         while True:
-            for vuelo in lista_vuelo:
-                if vuelo.nro_vuelo == nro_vuelo:
-                    return nro_vuelo
-            nro_vuelo = input("Error, el vuelo no existe. Intente de nuevo: ")
+            if lista_vuelo.buscar(nro_vuelo,"nro_vuelo","nro_vuelo"):
+                return nro_vuelo
+            else:
+                nro_vuelo = input("Error, el vuelo no existe. Intente de nuevo: ")
 
+
+        #Verifica que el número de serie del avión sea de uno existente
+    @staticmethod
+    def check_nro_serie(nro_serie,lista_avion):
+            while True:
+                for serie in lista_avion:
+                    if serie.nro_serie==nro_serie:
+                        return nro_serie
+                nro_serie = input("Error, el número de serie no existe. Intente de nuevo: ")
     #Verifica si el avión está en servicio activo
     @staticmethod
-    def check_disponibilidad(self,nro_serie):
-        if self.nro_serie==nro_serie:
-            if self.estado=='Fuera de servicio':
-                return False
-            else:
-                return True 
+    def check_estado(nro_serie,lista_avion):
+        while True:
+            for avion in lista_avion:
+                if avion.nro_serie==nro_serie:
+                    if avion.estado!="En servicio":
+                        nro_serie=input('Error. Debe ingresar un numero de serie de un avion en servicio ')
+                    else:
+                        return nro_serie
     
     #Pide que el número de viaje sea de 4 dígitos
     @staticmethod
     def check_nro_viaje(nro_viaje):
         while(nro_viaje.isnumeric()!=True or len(nro_viaje)!=4):
-            nro_reserva=input('Error, el nro. de viaje tiene que ser un numero de 4 digitos. Ingrese nuevamente:    ')
+            nro_viaje=input('Error, el nro. de viaje tiene que ser un numero de 4 digitos. Ingrese nuevamente:    ')
         return nro_viaje
 
 class reserva: 
@@ -301,18 +330,8 @@ class reserva:
         self.empleado=legajo_empleado
         self.nro_viaje=nro_viaje
         self.monto=monto
-        print('Se ejecuto bien')
+        
     
-    def eliminarReserva(nro_reserva,lista_reserva):
-        for reserva in lista_reserva:
-            if reserva.nro_reserva==nro_reserva:
-                lista_reserva.pop(reserva)
-                print('Se ha eliminado la reserva nro {}'.format(reserva.nro_reserva))
-
-    def buscarPasajero(self, nro_reserva, lista_reserva):
-        for reserva in lista_reserva:
-            if reserva.nro_reserva == nro_reserva:
-                return reserva.DNI_cliente
 
     #Pide que el nro de reserva sea un numérico de 4 dígitos
     @staticmethod
@@ -325,10 +344,10 @@ class reserva:
     @staticmethod
     def check_cliente(DNI_pasajero,lista_pasajero):
         while(True):
-            for pasajero in lista_pasajero:
-                if pasajero.DNI==DNI_pasajero:
-                    return DNI_pasajero    
-            DNI_pasajero=input('Error, el DNI tiene que ser de un pasajero existente. Ingrese nuevamente:    ')
+            if lista_pasajero.buscar(DNI_pasajero,"DNI","DNI"):
+                return DNI_pasajero
+            else: 
+                DNI_pasajero=input('Error, el DNI tiene que ser de un pasajero existente. Ingrese nuevamente:    ')
     
     #Verifica que el legajo del empleado sea de un empleado existente
     @staticmethod
@@ -343,23 +362,20 @@ class reserva:
     @staticmethod
     def check_viaje(nro_viaje,lista_viaje):
         while(True):
-            for viaje in lista_viaje:
-                if viaje.nro_viaje==nro_viaje:
-                    return nro_viaje
-            nro_viaje=input('Error, el viaje ingresado no corresponde con uno existente. Ingrese nuevamente:    ') 
+            if lista_viaje.buscar(nro_viaje,"nro_viaje","nro_viaje"):
+                return nro_viaje
+            else: 
+                nro_viaje=input('Error, el viaje ingresado no corresponde con uno existente. Ingrese nuevamente:    ') 
     
     #Chequea que el monto ingresado en la reserva sea el correspondiente
     @staticmethod
-    def check_monto(monto,nro_viaje,lista_viaje,lista_vuelo):
-        for viaje in lista_viaje:
-            if viaje.nro_viaje==nro_viaje:
-                for vuelo in lista_vuelo:
-                    if viaje.nro_vuelo==vuelo.nro_vuelo:
-                        while(True):
-                            if vuelo.monto==monto:
-                                return monto
-                            else:
-                                monto=input('Monto incorrecto, ingrese nuevamente su monto:    ')
+    def check_monto(precio,nro_viaje,lista_viaje,lista_vuelo):
+        nro_vuelo=lista_viaje.buscar(nro_viaje,"nro_viaje","nro_vuelo")
+        while True:
+            if lista_vuelo.buscar(nro_vuelo,"nro_vuelo","precio")==precio:
+                return precio
+            else: 
+                precio=input('Monto incorrecto, ingrese nuevamente su monto:    ')
 
     
         

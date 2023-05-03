@@ -40,7 +40,6 @@ class Lista():
                 return True
             elif getattr(nodo.prox.dato,atributo_principal)==input_principal:
                 nodo.prox=nodo.prox.prox
-                print('AAA')
                 self.len-=1
                 return True
             nodo=nodo.prox
