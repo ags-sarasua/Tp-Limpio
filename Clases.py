@@ -138,7 +138,7 @@ class empleado(persona):
     
     #esPiloto pregunta si ese empleado es un piloto devolviendo un booleano
     def esPiloto(self):
-        return self.sector == "piloto"
+        return self.sector == "Piloto"
 
     def ActualizarEmpleado(DNI, PorCual, indice, lista_empleado):
         for empleado in lista_empleado:
@@ -234,14 +234,32 @@ class vuelo:
 
     #Busca en la clase empleado si el legajo dado corresponde a un empleado, luego verifica si es un piloto
     @staticmethod
-    def check_piloto(legajo_piloto,lista_empleado):  
-        for empleado in lista_empleado:
-            if empleado.legajo == legajo_piloto:
-                piloto = empleado.esPiloto()
-                while(piloto == False):
-                    nuevo_legajo = ("Este empleado no es un piloto, ingrese nuevamente")
-                    vuelo.check_piloto(nuevo_legajo, lista_empleado)
-                break 
+    def check_piloto(legajo_piloto,lista_empleado):
+        cont=0     
+        for e in lista_empleado:
+            if(e.legajo == legajo_piloto):
+                cont+=1
+
+        if cont==0:
+            print('El legajo ingresado no existe')
+            legajo_nuevo=input("Ingrese el legajo nuevamente:")
+            vuelo.check_piloto(legajo_nuevo, lista_empleado)
+            return legajo_piloto
+             
+        else:
+            for empleado in lista_empleado:
+                if empleado.legajo == legajo_piloto:
+                    print("aaa")
+                    piloto = empleado.esPiloto()
+                    print(piloto)
+                    if piloto == False:
+                        print("bbb")
+                        nuevo_legajo = input("Este empleado no es un piloto, ingrese nuevamente:    ")
+                        vuelo.check_piloto(nuevo_legajo, lista_empleado)
+                        return legajo_piloto
+                    break 
+            
+
         return legajo_piloto
 
 

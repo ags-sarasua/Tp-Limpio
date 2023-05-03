@@ -127,7 +127,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
 
                         
                         elif eleccion_actualizar=="6":
-                            nuevo_input=persona.checklegajo(nuevo_input)
+                            nuevo_input=Clases.empleado.checklegajo(nuevo_input)
                             actualizar(lista_empleado,input_principal,"DNI","legajo",nuevo_input) 
 
                         elif eleccion_actualizar=="5":
@@ -277,7 +277,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         lista_vuelo.actualizar_le(input_principal,"nro_vuelo","aeropuerto_llegada",nuevo_input) 
 
                     if eleccion_actualizar=="4":
-                        nuevo_input=vuelo.check_piloto(lista_empleado,nuevo_input) 
+                        nuevo_input=vuelo.check_piloto(nuevo_input,lista_empleado) 
                         lista_vuelo.actualizar_le(input_principal,"nro_vuelo","legajo_piloto",nuevo_input) 
 
                     if eleccion_actualizar=="5":
@@ -392,7 +392,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                         lista_reserva.actualizar_le(input_principal,"nro_reserva","DNI_cliente",nuevo_input) 
 
                     if eleccion_actualizar=="3":
-                        nuevo_input=empleado.checklegajo(nuevo_input)
+                        nuevo_input=Clases.empleado.checklegajo(nuevo_input)
                         lista_reserva.actualizar_le(input_principal,"nro_reserva","legajo_empleado",nuevo_input) 
 
                     if eleccion_actualizar=="4":
