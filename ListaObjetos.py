@@ -4,7 +4,7 @@ import datetime
 from listasenlazadas import *
 import numpy as np
 
-#personas
+#Este archivo tiene instancias de objetos por defecto
 
 lista_persona=Lista()
 

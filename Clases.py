@@ -57,13 +57,11 @@ def registrarse(username):
         for linea in archivo:
             usu = linea.strip().split(".")[0]
             listaUsuarios.append(usu)
-        print(listaUsuarios)
     while username in listaUsuarios:
         username = input("Este nombre de usuario ya existe. Ingrese otro: ")
     password = input("Ingrese una contraseña: ")
     with open("Usuarios.txt", 'a', encoding='utf-8') as archivo:
         archivo.write(f"\n{username}.{password}")
-        print("Se creó el usuario con éxito")
         return True
 class persona: 
     def __init__(self,DNI,nombre,sexo,fecha_de_nacimiento,pais):
@@ -100,11 +98,11 @@ class persona:
 
     #chequear fechaNacimiento: datetime y que sea mas chica que la fecha de hoy
     @staticmethod
-    def check_fecha_de_nacimiento(fechaNacimiento):
-        while fechaNacimiento > datetime.date.today():
+    def check_fecha(fecha):
+        while fecha > datetime.date.today():
             print('La fecha ingresada no es valida, debe ser antes que el día de hoy')
-            fechaNacimiento=validarFecha()
-        return fechaNacimiento
+            fecha=validarFecha()
+        return fecha
       
     #chequear pais: string y que pertenezca a un pais real del archivo correspondiente
     @staticmethod
@@ -114,8 +112,8 @@ class persona:
         archivo.close()
 
         while pais not in paises:
-           print('El pais ingresado no es valido')
-           pais=input("Ingrese el pais nuevamente:") 
+           print('El pais ingresado no es valido, debe tener su primer letra en mayúscula')
+           pais=input("Ingrese el pais nuevamente: ") 
         return pais
     @staticmethod
     def DNI_repetido(DNI,lista_persona):
@@ -177,7 +175,6 @@ class avion:
         self.modelo=modelo
         self.fecha_alta=fecha_alta
         self.estado=estado
-        print('Se creo bien')
     
     #dado un número de serie, elimina la instancia de la lista de aviones
     def eliminarAvion(nro_serie,matriz_aviones):
@@ -279,12 +276,14 @@ class viaje:
 
     #Verifica si el avión está en servicio activo
     @staticmethod
-    def check_estado(self,nro_serie,lista_avion):
+    def check_estado(nro_serie,lista_avion):
         while True:
-            if lista_avion(nro_serie,"nro_serie","estado")!="En servicio":
-                nro_serie=input('Ingrese un numero de serie de un avion en servicio')
-            else:
-                return nro_serie
+            for avion in lista_avion:
+                if avion.nro_serie==nro_serie:
+                    if avion.estado!="En servicio":
+                        nro_serie=input('Error. Debe ingresar un numero de serie de un avion en servicio ')
+                    else:
+                        return nro_serie
     
     #Pide que el número de viaje sea de 4 dígitos
     @staticmethod
@@ -300,7 +299,7 @@ class reserva:
         self.empleado=legajo_empleado
         self.nro_viaje=nro_viaje
         self.monto=monto
-        print('Se ejecuto bien')
+        
     
 
     #Pide que el nro de reserva sea un numérico de 4 dígitos
@@ -339,7 +338,7 @@ class reserva:
     
     #Chequea que el monto ingresado en la reserva sea el correspondiente
     @staticmethod
-    def check_monto(precio,nro_viaje,lista_viaje,lista_vuelo):
+    def check_monto(precio,nro_viaje,lista_vuelo):
         if lista_vuelo.buscar(nro_viaje,"nro_viaje","precio")==precio:
             return precio
         else: 
