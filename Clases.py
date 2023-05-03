@@ -139,6 +139,9 @@ class empleado(persona):
                 lista_empleado[indice-1] = PorCual
         return lista_empleado
 
+    def __str__(self):
+        return "Empleado DNI {}, se llama {}, sexo {}, nació el {}, oriundo de {}, legajo {}, trabaja como {}".format(self.DNI,self.nombre,self.sexo,self.fecha_de_nacimiento,self.pais,self.legajo,self.sector)
+
     #chequear legajo: que sea un numero de 4 digitos y que no esté repetido 
     @staticmethod
     def checklegajo(legajo, lista_empleado):
@@ -175,6 +178,9 @@ class avion:
         self.modelo=modelo
         self.fecha_alta=fecha_alta
         self.estado=estado
+    
+    def __str__(self):
+        return 'Nro de serie: {}, modelo: {}, fecha de alta: {}, estado: {}'. format(self.nro_serie,self.modelo,self.modelo,self.fecha_alta,self.estado)
     
     #dado un número de serie, elimina la instancia de la lista de aviones
     def eliminarAvion(nro_serie,matriz_aviones):
@@ -251,19 +257,37 @@ class viaje:
         self.pasajeros=[]
         self.contador_pasajeros = 0
     
-    def agregarpasajero(self, nro_viaje, pasajero, lista_viaje):
-        if lista_viaje.buscar(nro_viaje,"nro_viaje","nro_viaje"):
-            self.contador_pasajeros+=1
-            self.pasajeros.append(pasajero)
-            return True
-        else:
-            return False
+    def agregar_pasajero(nro_viaje, pasajero, lista_viaje):
+        nodo_actual = lista_viaje.head
+        while nodo_actual is not None:
+            if nodo_actual.dato.nro_viaje == nro_viaje:
+                if pasajero not in nodo_actual.dato.pasajeros:
+                    if len(nodo_actual.dato.pasajeros)<5:
+                        nodo_actual.dato.pasajeros.append(pasajero)
+                        nodo_actual.dato.contador_pasajeros+=1
+                        return True
+                else:
+                    print("El pasajero ya está en la lista o el viaje ya esta lleno.")
+                    return False
+            nodo_actual = nodo_actual.prox
+        print("El número de viaje no fue encontrado.")
+        return False
+    def eliminar_pasajero(nro_viaje, pasajero, lista_viaje):
+        nodo_actual = lista_viaje.head
+        while nodo_actual is not None:
+            if nodo_actual.dato.nro_viaje == nro_viaje:
+                if pasajero in nodo_actual.dato.pasajeros:
+                        nodo_actual.dato.pasajeros.remove(pasajero)
+                        nodo_actual.dato.contador_pasajeros-=1
+                        return True
+                else:
+                    print("El pasajero no está en el vuelo indicado")
+                    return False
+            nodo_actual = nodo_actual.prox
+        print("El número de viaje no fue encontrado.")
+        return False
 
-    def eliminarpasajero(self,pasajero):
-        for i in self.pasajeros:
-            if i==pasajero:
-                self.pasajeros.pop(pasajero)
-                self.contador_pasajeros-=1
+
 
     #Chequea que el vuelo existe en la clase Vuelo
     @staticmethod

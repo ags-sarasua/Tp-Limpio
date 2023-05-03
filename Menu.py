@@ -43,7 +43,8 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 print('1)Visualizar lista   2)Agregar empleado   3)Eliminar empleado    4)Graficar   B)Volver')
                 eleccion_metodo=input('Ingrese su eleccion: ')
                 if eleccion_metodo=='1':
-                    print(lista_empleado)
+                    for empleado in lista_empleado:
+                        print(empleado)
                 if eleccion_metodo=='2':
                     print('1)DNI   2)Nombre   3)Sexo  4)Fecha de nacimiento   5)Pais    6)Legajo    7)Sector')
                     listaComodin=[]
@@ -114,7 +115,8 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 print('1)Visualizar lista   2)Agregar avion   3)Eliminar avion   B)Volver')
                 eleccion_metodo=input('Ingrese su eleccion: ')
                 if eleccion_metodo=='1':
-                    print(lista_avion)
+                    for avion in lista_avion:
+                        print(avion)
                 if eleccion_metodo=='2':
                     print('1)Nro serie   2)Modelo   3)Fecha alta  4)Estado')
                     listaComodin=[]
@@ -210,14 +212,16 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     listaComodin[3]=reserva.check_viaje(listaComodin[3],lista_viaje)
                     listaComodin[4]=reserva.check_monto(listaComodin[4],listaComodin[3],lista_viaje, lista_vuelo)
                     
-                    if viaje.agregarpasajero(listaComodin[1], listaComodin[3],lista_viaje): #aca falta pasarle un argumento 
+                    if viaje.agregar_pasajero(listaComodin[3], listaComodin[1],lista_viaje): 
                         lista_reserva.append(Nodo(reserva(listaComodin[0], listaComodin[1], listaComodin[2],listaComodin[3],listaComodin[4])))
-                    else:
-                        print('Lamentablemente el vuelo está lleno ')
                 if eleccion_metodo=='3':
                     input_principal=input('Ingrese la reserva que desea eliminar: ')
-                    if lista_reserva.pop(input_principal,"nro_reserva"): print('La reserva nro {} se ha eliminado correctamente'.format(input_principal))
-                    else: print('El viaje ingresado no se encuentra en la base de datos ')
+                    dni_ingresado=input("Ingrese el dni del pasajero: ")
+                    viaje_ingresado=input("Ingrese el número de viaje del cual desea eliminar al pasajero: ")
+
+                    if viaje.eliminar_pasajero(viaje_ingresado,dni_ingresado,lista_viaje): 
+                        if lista_reserva.pop(input_principal,"nro_reserva"):
+                            print('La reserva nro {} se ha eliminado correctamente'.format(input_principal))
                 if eleccion_metodo=='B':
                     menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,lista_reserva)
 
