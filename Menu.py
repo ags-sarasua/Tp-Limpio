@@ -329,7 +329,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 if eleccion_metodo=='3':
                     print('1)Nro vuelo  2)Aeropuerto salida  3)Aeropuerto llegada    4)Legajo del piloto   5)Precio')
                     input_principal=input("ingrese el Nro de vuelo del vuelo a actualizar:    ")
-                    input_principal=Clases.vuelo.check_nro_vuelo(input_principal)
+                    input_principal=Clases.vuelo.check_sintaxis_nro_vuelo(input_principal)
                     eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
                     nuevo_input=input("Ingrese el valor actualizado:    ")
 

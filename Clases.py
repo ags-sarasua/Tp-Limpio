@@ -324,7 +324,7 @@ class vuelo:
             print('El legajo ingresado no existe')
             legajo_nuevo=input("Ingrese el legajo nuevamente:")
             vuelo.check_piloto(legajo_nuevo, lista_empleado)
-            return legajo_piloto
+            return nuevo_legajo
              
         else:
             for empleado in lista_empleado:
@@ -336,7 +336,7 @@ class vuelo:
                         print("bbb")
                         nuevo_legajo = input("Este empleado no es un piloto, ingrese nuevamente:    ")
                         vuelo.check_piloto(nuevo_legajo, lista_empleado)
-                        return legajo_piloto
+                        return nuevo_legajo
                     break 
             
 
