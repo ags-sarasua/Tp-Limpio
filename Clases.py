@@ -71,6 +71,14 @@ def registrarse(username):
         archivo.write(f"\n{username}.{password}")
         return True
     
+#actualizar para las listas fijas
+def actualizar(lista, input_principal, atributo_principal, atributo_a_buscar, nuevo_input):
+    for objeto in lista:
+        if getattr(objeto,atributo_principal)==input_principal:
+            setattr(objeto,atributo_a_buscar,nuevo_input)
+            return True
+    return False
+
 class persona: 
     def __init__(self,DNI,nombre,apellido,sexo,fecha_de_nacimiento,pais,mail,telefono):
         self.DNI=DNI
