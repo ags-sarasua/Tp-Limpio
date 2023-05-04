@@ -18,6 +18,10 @@ agustin.asdasd
 holis.comoestas
 ninfa.ninfa
 ninfa2.ninfa2
-     agu.12345667
+agu.12345667
 ag.12
 123.123
+hola.txt
+holaa.txt
+ninfaaaa.123
+bruno.hello

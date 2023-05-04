@@ -3,12 +3,6 @@ import datetime
 
 #validarNum valida que un número ingresado por el usuario sea un número entre cierto rango pedido
 def validarNum(tipoDato: str, min: int, max: int) -> int:
-    """
-    min: cota inferior
-    max. cota superior
-
-    return: numero ingresado por el usuario en el intervalo {min, max}
-    """
     ingresado = min - 1
     booleana = False
     while(booleana == False):
@@ -189,14 +183,9 @@ class empleado(persona):
     def esPiloto(self):
         return self.sector == "Piloto"
 
-    def ActualizarEmpleado(DNI, PorCual, indice, lista_empleado):
-        for empleado in lista_empleado:
-            if empleado.DNI == DNI and (indice-1) < len(lista_empleado) and indice >= 1:
-                lista_empleado[indice-1] = PorCual
-        return lista_empleado
 
     def __str__(self):
-        return "Empleado DNI {}, se llama {}, sexo {}, nació el {}, oriundo de {}, legajo {}, trabaja como {}".format(self.DNI,self.nombre,self.sexo,self.fecha_de_nacimiento,self.pais,self.legajo,self.sector)
+        return "Empleado DNI {}, se llama {}, {}, sexo {}, nació el {}, oriundo de {}, legajo {}, trabaja como {}".format(self.DNI,self.nombre,self.apellido,self.sexo,self.fecha_de_nacimiento,self.pais,self.legajo,self.sector)
 
     @staticmethod
     def DNI_repetido_empleado(DNI,lista_empleado):
@@ -314,33 +303,20 @@ class vuelo:
 
     #Busca en la clase empleado si el legajo dado corresponde a un empleado, luego verifica si es un piloto
     @staticmethod
-    def check_piloto(legajo_piloto,lista_empleado):
-        cont=0     
-        for e in lista_empleado:
-            if(e.legajo == legajo_piloto):
-                cont+=1
-
-        if cont==0:
-            print('El legajo ingresado no existe')
-            legajo_nuevo=input("Ingrese el legajo nuevamente:")
-            vuelo.check_piloto(legajo_nuevo, lista_empleado)
-            return nuevo_legajo
-             
-        else:
+    def check_piloto(legajo_piloto, lista_empleado):
+        while True:
+            empleado_encontrado = False
             for empleado in lista_empleado:
                 if empleado.legajo == legajo_piloto:
-                    print("aaa")
-                    piloto = empleado.esPiloto()
-                    print(piloto)
-                    if piloto == False:
-                        print("bbb")
-                        nuevo_legajo = input("Este empleado no es un piloto, ingrese nuevamente:    ")
-                        vuelo.check_piloto(nuevo_legajo, lista_empleado)
-                        return nuevo_legajo
-                    break 
-            
-
-        return legajo_piloto
+                    empleado_encontrado = True
+                    if empleado.esPiloto():
+                        return legajo_piloto
+                    else:
+                        print("Este empleado no es un piloto.")
+                        break
+            if not empleado_encontrado:
+                print("El legajo ingresado no existe.")
+            legajo_piloto = input("Ingrese el legajo de un piloto: ")
 
 #viaje   
 class viaje:
@@ -357,14 +333,17 @@ class viaje:
         nodo_actual = lista_viaje.head
         while nodo_actual is not None:
             if nodo_actual.dato.nro_viaje == nro_viaje:
-                if pasajero not in nodo_actual.dato.pasajeros:
-                    if len(nodo_actual.dato.pasajeros)<5:
+                if len(nodo_actual.dato.pasajeros) < 5:
+                    if pasajero not in nodo_actual.dato.pasajeros:
                         nodo_actual.dato.pasajeros.append(pasajero)
-                        nodo_actual.dato.contador_pasajeros+=1
+                        nodo_actual.dato.contador_pasajeros += 1
                         return True
                     else:
-                        print("El pasajero ya está en la lista o el viaje ya esta lleno.")
+                        print("El pasajero ya está en la lista.")
                         return False
+                else:
+                    print("El viaje ya está lleno.")
+                    return False
             nodo_actual = nodo_actual.prox
         print("El número de viaje no fue encontrado.")
         return False

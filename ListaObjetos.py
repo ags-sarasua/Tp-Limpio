@@ -146,7 +146,6 @@ reserva8=Clases.reserva("1008", "89012345", "9013", "8765" , "2700")
 reserva9=Clases.reserva("1009", "90123456", "1234", "3568" , "1800")
 reserva10=Clases.reserva("1010", "67899123", "9013", "0965" , "3000")
 
-
 Clases.viaje.agregar_pasajero( "1464", "12345678",lista_viaje)
 Clases.viaje.agregar_pasajero( "2746", "23456789",lista_viaje)
 Clases.viaje.agregar_pasajero( "3578", "34567890",lista_viaje)
