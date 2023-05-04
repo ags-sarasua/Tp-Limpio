@@ -48,12 +48,10 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     print('1)DNI   2)Nombre     3)Apellido   4)Sexo  5)Fecha de nacimiento   6)Pais     7)Mail    8)Telefono')
                     input_principal=input("ingrese el DNI de la persona a actualizar:    ")
                     input_principal=persona.check_DNI(input_principal)
-                    eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                    eleccion_actualizar=input("Ingrese numero de atributo a actualizar:   ")
                     
-                    if eleccion_actualizar!="5":
+                    if eleccion_actualizar!="5" and eleccion_actualizar in ['1','2','3','4','6','7','8']:
                         nuevo_input=input("Ingrese el valor actualizado:    ")
-
-                    
                         if eleccion_actualizar=="1":
                             nuevo_input=persona.check_DNI(nuevo_input)
                             lista_persona.actualizar_le(input_principal,"DNI","DNI",nuevo_input)
@@ -87,7 +85,8 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     elif eleccion_actualizar=="5":
                             nuevo_input=validarFecha()
                             nuevo_input=persona.check_fecha(nuevo_input)
-                            lista_persona.actualizar_le(input_principal,"DNI","fecha_de_nacimiento",nuevo_input)                     
+                            lista_persona.actualizar_le(input_principal,"DNI","fecha_de_nacimiento",nuevo_input)
+                    else: print('Ingrese alguna de las opciones')                     
 
                 if eleccion_metodo=='4':
                     DNI=input("Ingrese el DNI de la persona que quiere eliminar: ")
@@ -146,10 +145,10 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     print('1)DNI   2)Nombre     3)Apellido   4)Sexo  5)Fecha de nacimiento   6)Pais    7)Legajo    8)Sector')
                     input_principal=input("ingrese el DNI del empleado a actualizar:    ")
                     input_principal=persona.check_DNI(input_principal)
-                    eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                    eleccion_actualizar=input("Ingrese numero de atributo a actualizar:   ")
                     
 
-                    if eleccion_actualizar!="5":
+                    if eleccion_actualizar!="5" and eleccion_actualizar in ['1','2','3','4','6','7','8']:
                         nuevo_input=input("Ingrese el valor actualizado:    ")
                         if eleccion_actualizar=="1":
                             nuevo_input=persona.check_DNI(nuevo_input)
@@ -161,9 +160,6 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             if actualizar(lista_empleado,input_principal,"DNI","nombre",nuevo_input)==False:
                                 print("El DNI ingrsado no corresponde al de un empleado existente. La información no ha sido actulizada con exito.")
                                 
-                           
-                            
-
                         elif eleccion_actualizar=="3":
                             nuevo_input=persona.check_nombre(nuevo_input,"apellido")
                             if actualizar(lista_empleado,input_principal,"DNI","apellido",nuevo_input)==False:
@@ -173,7 +169,6 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             nuevo_input=persona.check_sexo(nuevo_input)
                             if actualizar(lista_empleado,input_principal,"DNI","sexo",nuevo_input)==False:
                                 print("El DNI ingrsado no corresponde al de un empleado existente. La información no ha sido actulizada con exito.")
-
                         
                         elif eleccion_actualizar=="7":
                             nuevo_input=Clases.empleado.checklegajo(nuevo_input)
@@ -194,7 +189,8 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             nuevo_input=validarFecha()
                             nuevo_input=persona.check_fecha_de_nacimiento(nuevo_input)
                             if actualizar(lista_empleado,input_principal,"DNI","fecha_de_nacimiento",nuevo_input)==False:
-                                print("El DNI ingrsado no corresponde al de un empleado existente. La información no ha sido actulizada con exito.") 
+                                print("El DNI ingrsado no corresponde al de un empleado existente. La información no ha sido actulizada con exito.")
+                    else: print('Opcion no valida') 
             
                 if eleccion_metodo=='5':
                     print('1)Cupo de genero   2)Distribuicion de roles')
@@ -280,41 +276,41 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     print('1)Nro serie   2)Modelo   3)Fecha alta  4)Estado')
                     input_principal=input("ingrese el Nro de serie del avion a actualizar:    ")
                     input_principal=Clases.avion.check_sintaxis_nro_serie(input_principal)
-                    eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                    eleccion_actualizar=input("Ingrese numero de atributo a actualizar:   ")
                     
                     if eleccion_actualizar!="3":
                         nuevo_input=input("Ingrese el valor actualizado:    ")
 
-                
-                    if eleccion_actualizar=="1":
-                        nuevo_input=Clases.avion.check_nro_serie(nuevo_input)
-                        actualizar(lista_avion,input_principal,"nro_serie","nro_serie",nuevo_input)
+                        if eleccion_actualizar=="1":
+                            nuevo_input=Clases.avion.check_nro_serie(nuevo_input)
+                            actualizar(lista_avion,input_principal,"nro_serie","nro_serie",nuevo_input)
 
-                    if eleccion_actualizar=="2":
-                        nuevo_input=nuevo_input
-                        actualizar(lista_avion,input_principal,"nro_serie","modelo",nuevo_input) 
+                        elif eleccion_actualizar=="2":
+                            nuevo_input=nuevo_input
+                            actualizar(lista_avion,input_principal,"nro_serie","modelo",nuevo_input) 
+                            
+                        elif eleccion_actualizar=="4":
+                            nuevo_input=Clases.avion.check_estado(nuevo_input)
+                            actualizar(lista_avion,input_principal,"nro_serie","fecha_alta",nuevo_input)
 
-                    if eleccion_actualizar=="3":
+                    elif eleccion_actualizar=="3":
                         nuevo_input=validarFecha()
                         actualizar(lista_avion,input_principal,"nro_serie","fecha_alta",nuevo_input) 
 
-                    if eleccion_actualizar=="4":
-                        nuevo_input=Clases.avion.check_estado(nuevo_input)
-                        actualizar(lista_avion,input_principal,"nro_serie","fecha_alta",nuevo_input)
 
 
         if eleccion_clase=='4':
             while True:
-                print('1)Visualizar lista   2)Agregar Clases.vuelo   3)Actualizar Vuelo  4) Eliminar Clases.vuelo B)Volver')
+                print('1)Visualizar lista   2)Agregar vuelo   3)Actualizar Vuelo  4) Eliminar vuelo B)Volver')
                 eleccion_metodo=input('Ingrese su eleccion: ')
                 print('\n \t Comentario')
-                print('Nro Clases.vuelo: 4 digitos numericos \n')
+                print('Nro vuelo: 4 digitos numericos \n')
                 if eleccion_metodo=='1':
                     print(lista_vuelo)
                 if eleccion_metodo=='2':
-                    print('1)Nro Clases.vuelo  2)Aeropuerto salida  3)Aeropuerto llegada   4)Legajo del piloto   5)Precio')
+                    print('1)Nro vuelo  2)Aeropuerto salida  3)Aeropuerto llegada   4)Legajo del piloto   5)Precio')
                     listaComodin=[]
-                    listaMenu=['Nro Clases.vuelo'  ,'Aeropuerto salida' , 'Aeropuerto llegada'  ,'Legajo del piloto' ,  'Precio']
+                    listaMenu=['Nro vuelo'  ,'Aeropuerto salida' , 'Aeropuerto llegada'  ,'Legajo del piloto' ,  'Precio']
                     for i in range(5):
                         user_input = str(input("Inroduzca {} : ".format(listaMenu[i])))
                         listaComodin.append(user_input)
@@ -329,8 +325,8 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 if eleccion_metodo=='3':
                     print('1)Nro vuelo  2)Aeropuerto salida  3)Aeropuerto llegada    4)Legajo del piloto   5)Precio')
                     input_principal=input("ingrese el Nro de vuelo del vuelo a actualizar:    ")
-                    input_principal=Clases.vuelo.check_sintaxis_nro_vuelo(input_principal)
-                    eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                    input_principal=Clases.vuelo.check_nro_vuelo(input_principal)
+                    eleccion_actualizar=input("Ingrese numero de atributo a actualizar:   ")
                     nuevo_input=input("Ingrese el valor actualizado:    ")
 
                 
@@ -355,7 +351,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 if eleccion_metodo=='4':
                     Clases.vuelo=input("Ingrese el número de vuelo que quiere eliminar: ")
                     if lista_vuelo.pop(Clases.vuelo,"nro_vuelo"):
-                        print("Se eliminó correctamente el Clases.vuelo indicado")
+                        print("Se eliminó correctamente el vuelo indicado")
                     else:
                         print("No se puedo eliminar correctamente el vuelo indicado")                
 
@@ -367,13 +363,13 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                 print('1)Visualizar lista   2)Agregar viaje     3)Eliminar viaje  4)Actualizar Viaje    B)Volver')
                 eleccion_metodo=input('Ingrese su eleccion: ')
                 print('\n \t Comentario')
-                print('Nro viaje: 4 digitos numericos \nNro Clases.vuelo: 4 digitos numericos \n')
+                print('Nro viaje: 4 digitos numericos \nNro vuelo: 4 digitos numericos \n')
                 if eleccion_metodo=='1':
                     print(lista_viaje)
                 if eleccion_metodo=='2':
-                    print('1)Nro viaje   2)Nro Clases.vuelo    3)Nro serie   4)Fecha')
+                    print('1)Nro viaje   2)Nro vuelo    3)Nro serie   4)Fecha')
                     listaComodin=[]
-                    listaMenu=['Nro viaje' ,  'Nro Clases.vuelo'  ,  'Nro serie'  , 'Fecha']
+                    listaMenu=['Nro viaje' ,  'Nro vuelo'  ,  'Nro serie'  , 'Fecha']
                     for i in range(4):
                         if i == 3:
                             print("Ahora a la fecha del viaje.")
@@ -394,10 +390,10 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     else: print('El viaje ingresado no se encuentra en la base de datos')
 
                 if eleccion_metodo=='4':
-                    print('1)Nro viaje   2)Nro Clases.vuelo    3)Nro serie   4)Fecha')
+                    print('1)Nro viaje   2)Nro vuelo    3)Nro serie   4)Fecha')
                     input_principal=input("ingrese el Nro de viaje del viaje a actualizar:    ")
                     input_principal=Clases.viaje.check_sintaxis_nro_viaje(input_principal)
-                    eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                    eleccion_actualizar=input("Ingrese numero de atributo a actualizar:   ")
                     
                     if eleccion_actualizar!="4":
                         nuevo_input=input("Ingrese el valor actualizado:    ")
@@ -460,7 +456,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     print('1)Nro reserva   2)DNI cliente   3)Legajo Empleado  4)Nro viaje   5)Monto')
                     input_principal=input("ingrese el Nro de reserva de la reserva a actualizar:    ")
                     input_principal=Clases.reserva.check_sintaxis_nro_reserva(input_principal)
-                    eleccion_actualizar=input("Ingrese atributo a actualizar:   ")
+                    eleccion_actualizar=input("Ingrese numero del atributo a actualizar:   ")
                     nuevo_input=input("Ingrese el valor actualizado:    ")
 
                 

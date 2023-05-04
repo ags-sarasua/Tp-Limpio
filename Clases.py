@@ -140,8 +140,8 @@ class persona:
     def check_existencia_DNI(DNI,lista_persona):        
         while lista_persona.buscar(DNI,"DNI","DNI"):
             DNI=input('Existe un usuario con su DNI, ingrese uno nuevo:   ')
-            DNI=persona.check_sintaxis_mail(DNI)
-            DNI=persona.check_existencia_mail(DNI,lista_persona)
+            DNI=persona.check_DNI(DNI)
+            DNI=persona.check_existencia_DNI(DNI,lista_persona)
             return DNI
         return DNI
     
