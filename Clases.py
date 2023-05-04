@@ -1,6 +1,6 @@
 import datetime
 
-print("modificado")
+
 #validarNum valida que un número ingresado por el usuario sea un número entre cierto rango pedido
 def validarNum(tipoDato: str, min: int, max: int) -> int:
     """
@@ -79,6 +79,7 @@ def actualizar(lista, input_principal, atributo_principal, atributo_a_buscar, nu
             return True
     return False
 
+#persona
 class persona: 
     def __init__(self,DNI,nombre,apellido,sexo,fecha_de_nacimiento,pais,mail,telefono):
         self.DNI=DNI
@@ -139,8 +140,8 @@ class persona:
     def check_existencia_DNI(DNI,lista_persona):        
         while lista_persona.buscar(DNI,"DNI","DNI"):
             DNI=input('Existe un usuario con su DNI, ingrese uno nuevo:   ')
-            persona.check_sintaxis_mail(DNI)
-            persona.check_existencia_mail(DNI,lista_persona)
+            DNI=persona.check_sintaxis_mail(DNI)
+            DNI=persona.check_existencia_mail(DNI,lista_persona)
             return DNI
         return DNI
     
@@ -155,8 +156,8 @@ class persona:
     def check_existencia_mail(mail,lista_persona):        
         while lista_persona.buscar(mail,"mail","mail"):
             mail=input('Existe un usuario con su mail, ingrese uno nuevo:   ')
-            persona.check_sintaxis_mail(mail)
-            persona.check_existencia_mail(mail,lista_persona)
+            mail=persona.check_sintaxis_mail(mail)
+            mail=persona.check_existencia_mail(mail,lista_persona)
             return mail
         return mail
 
@@ -172,12 +173,12 @@ class persona:
     def check_existencia_telefono(telefono,lista_persona):        
         while lista_persona.buscar(telefono,"telefono","telefono"):
             telefono=input('Existe un usuario con su telefono, ingrese uno nuevo:   ')
-            persona.check_sintaxis_telefono(telefono)
-            persona.check_existencia_telefono(telefono,lista_persona)
+            telefono=persona.check_sintaxis_telefono(telefono)
+            telefono=persona.check_existencia_telefono(telefono,lista_persona)
             return telefono
         return telefono
     
-    
+#empleado
 class empleado(persona):
     def __init__(self,DNI,nombre,apellido,sexo,fecha_de_nacimiento,pais,legajo,sector):
         super().__init__(DNI,nombre,apellido,sexo,fecha_de_nacimiento,pais,None,None)
@@ -237,7 +238,7 @@ class empleado(persona):
             sector=input("Ingrese el sector nuevamente:")
         return sector
 
-
+#avion
 class avion:
     def __init__(self,nro_serie,modelo,fecha_alta,estado):
         self.nro_serie=nro_serie
@@ -246,7 +247,7 @@ class avion:
         self.estado=estado
     
     def __str__(self):
-        return 'Nro de serie: {}, modelo: {}, fecha de alta: {}, estado: {}'. format(self.nro_serie,self.modelo,self.modelo,self.fecha_alta,self.estado)
+        return 'Nro de serie: {}, modelo: {}, fecha de alta: {}, estado: {}'. format(self.nro_serie,self.modelo,self.fecha_alta,self.estado)
     
     #dado un número de serie, elimina la instancia de la lista de aviones
     def eliminarAvion(nro_serie,matriz_aviones):
@@ -259,9 +260,9 @@ class avion:
     def nroSerie_repetido_empleado(nro_serie,lista_avion):    
         for objeto in lista_avion:
             if objeto.nro_serie==nro_serie:
-                nro_serie=input('Ingreso un DNI de un empleado preexistente. Ingrese uno nuevo:  ')
-                avion.check_sintaxis_nro_serie(nro_serie)
-                avion.nroSerie_repetido_empleado(nro_serie,lista_avion)
+                nro_serie=input('Ingrese un nro de serie nuevo:  ')
+                nro_serie=avion.check_sintaxis_nro_serie(nro_serie)
+                nro_serie=avion.nroSerie_repetido_empleado(nro_serie,lista_avion)
                 return nro_serie
         return nro_serie
             
@@ -278,7 +279,8 @@ class avion:
         while(estado not in ['En servicio','Fuera de servicio']):
             estado=input('El estado del avion debe ser "En servicio" o "Fuera de servicio", Ingrese nuevamente:    ')
         return estado
-    
+
+#vuelo
 class vuelo:
     def __init__(self,nro_vuelo,aeropuerto_salida,aeropuerto_llegada,legajo_piloto,precio):
         self.nro_vuelo=nro_vuelo
@@ -298,8 +300,8 @@ class vuelo:
     def check_existencia_nro_vuelo(nro_vuelo,lista_vuelo):        
         while lista_vuelo.buscar(nro_vuelo,"nro_vuelo","nro_vuelo"):
             nro_vuelo=input('Existe un vuelo con ese nro de vuelo , ingrese uno nuevo:   ')
-            vuelo.check_sintaxis_nro_vuelo(nro_vuelo)
-            vuelo.check_existencia_nro_vuelo(nro_vuelo,lista_vuelo)
+            nro_vuelo=vuelo.check_sintaxis_nro_vuelo(nro_vuelo)
+            nro_vuelo=vuelo.check_existencia_nro_vuelo(nro_vuelo,lista_vuelo)
             return nro_vuelo
         return nro_vuelo
     
@@ -340,8 +342,7 @@ class vuelo:
 
         return legajo_piloto
 
-
-       
+#viaje   
 class viaje:
     capacidad=5
     def __init__(self,nro_viaje,nro_vuelo,nro_serie,fecha):
@@ -423,11 +424,12 @@ class viaje:
     def check_existencia_nro_viaje(nro_viaje,lista_viaje):        
         while lista_viaje.buscar(nro_viaje,"nro_viaje","nro_viaje"):
             nro_viaje=input('Existe un viaje con ese nro de viaje , ingrese uno nuevo:   ')
-            viaje.check_sintaxis_nro_viaje(nro_viaje)
-            viaje.check_existencia_nro_viaje(nro_viaje,lista_viaje)
+            nro_viaje=viaje.check_sintaxis_nro_viaje(nro_viaje)
+            nro_viaje=viaje.check_existencia_nro_viaje(nro_viaje,lista_viaje)
             return nro_viaje
         return nro_viaje
 
+#reserva
 class reserva: 
     def __init__(self,nro_reserva,DNI_cliente,legajo_empleado,nro_viaje,monto):
         self.nro_reserva=nro_reserva
@@ -446,8 +448,8 @@ class reserva:
     def check_existencia_nro_reserva(nro_reserva,lista_reserva):        
         while lista_reserva.buscar(nro_reserva,"nro_reserva","nro_reserva"):
             nro_reserva=input('Existe una reserva con ese nro de reserva , ingrese uno nuevo:   ')
-            reserva.check_sintaxis_nro_reserva(nro_reserva)
-            reserva.check_existencia_nro_reserva(nro_reserva,lista_reserva)
+            nro_reserva=reserva.check_sintaxis_nro_reserva(nro_reserva)
+            nro_reserva=reserva.check_existencia_nro_reserva(nro_reserva,lista_reserva)
             return nro_reserva
         return nro_reserva
     
@@ -487,6 +489,3 @@ class reserva:
                 return precio
             else: 
                 precio=input('Monto incorrecto, ingrese nuevamente su monto:    ')
-
-    
-        
