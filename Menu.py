@@ -493,7 +493,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             print('La reserva nro {} se ha eliminado correctamente'.format(input_principal))
                     
                 if eleccion_metodo=='4':
-                    print('1)Nro reserva   2)DNI cliente   3)Legajo Empleado  4)Nro viaje   5)Monto')
+                    print('1)Nro reserva   2)DNI cliente   3)Legajo Empleado  4)Nro viaje')
                     print('\n \t Comentario')
                     print('Nro reserva: 4 digitos numericos  \nDNI: 8 digitos numericos   \nLegajo: 4 digitos numericos   \nNro viaje: 4 numeros \n')
                     input_principal=input("ingrese el Nro de reserva de la reserva a actualizar:    ")
@@ -501,7 +501,7 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                     eleccion_actualizar=input("Ingrese numero del atributo a actualizar:   ")
                     nuevo_input=input("Ingrese el valor a actualizar:    ")
 
-                    if eleccion_actualizar in ['1','2','3','4','5']:
+                    if eleccion_actualizar in ['1','2','3','4']:
                         if eleccion_actualizar=="1":
                             nuevo_input=Clases.reserva.check_sintaxis_nro_reserva(nuevo_input)
                             if lista_reserva.actualizar_le(input_principal,"nro_reserva","nro_reserva",nuevo_input) == False:
@@ -511,18 +511,16 @@ def menu_clase(lista_persona,lista_empleado,lista_avion,lista_vuelo,lista_viaje,
                             if lista_reserva.actualizar_le(input_principal,"nro_reserva","DNI_cliente",nuevo_input) == False:
                                 print("El número de reserva ingresado no corresponde al de un reserva existente. La información no ha sido actualizada con exito.")
                         if eleccion_actualizar=="3":
-                            nuevo_input=Clases.empleado.checklegajo(nuevo_input)
-                            if lista_reserva.actualizar_le(input_principal,"nro_reserva","legajo_empleado",nuevo_input) == False:
+                            nuevo_input=Clases.empleado.check_legajo_existente(nuevo_input, lista_empleado)
+                            if lista_reserva.actualizar_le(input_principal,"nro_reserva","empleado",nuevo_input) == False:
                                 print("El número de reserva ingresado no corresponde al de un reserva existente. La información no ha sido actualizada con exito.")
                         if eleccion_actualizar=="4":
-                            nuevo_input=Clases.viaje.check_sintaxis_nro_viaje(nuevo_input)
+                            
+                            nuevo_input=Clases.viaje.check_sintaxis_nro_viaje(nuevo_input,lista_viaje)
                             if lista_reserva.actualizar_le(input_principal,"nro_reserva","nro_viaje",nuevo_input) == False:
                                 print("El número de reserva ingresado no corresponde al de un reserva existente. La información no ha sido actualizada con exito.")
-                        if eleccion_actualizar=="5":
-                            nuevo_input=Clases.reserva.check_monto(nuevo_input)
-                            if lista_reserva.actualizar_le(input_principal,"nro_reserva","monto",nuevo_input) == False:       
-                                     print("El número de reserva ingresado no corresponde al de un reserva existente. La información no ha sido actualizada con exito.") 
 
+                        
                     else:
                         print("Ingrese alguna de las opciones numéricas y vuelva a intentarlo")
 

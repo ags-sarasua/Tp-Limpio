@@ -205,18 +205,52 @@ class empleado(persona):
                 print('El legajo debe ser un número')
                 legajo=input("Ingrese el legajo nuevamente:")
                 legajo=empleado.checklegajo(legajo, lista_empleado)
+                return legajo
         elif(len(legajo) != 4):
             print('El legajo debe tener 4 caracteres')
             legajo=input("Ingrese el legajo nuevamente:")
             legajo = empleado.checklegajo(legajo, lista_empleado)
-        else:        
+            return legajo
+        else:      
             for e in lista_empleado:
                 if(e.legajo == legajo):
                     print('El legajo ingresado ya existe')
                     legajo=input("Ingrese el legajo nuevamente:")
                     legajo = empleado.checklegajo(legajo, lista_empleado)
+                    return legajo
                     break                                
-        return legajo    
+        return legajo   
+    
+    @staticmethod
+    def check_legajo_existente(legajo, lista_empleado):
+        if legajo.isnumeric()==False:
+                print('El legajo debe ser un número')
+                legajo=input("Ingrese el legajo nuevamente:")
+                legajo=empleado.check_legajo_existente(legajo, lista_empleado)
+                return legajo
+        elif(len(legajo) != 4):
+            print('El legajo debe tener 4 caracteres')
+            legajo=input("Ingrese el legajo nuevamente:")
+            legajo = empleado.check_legajo_existente(legajo, lista_empleado)
+            return legajo
+        else: 
+            cont=0       
+            for e in lista_empleado:
+                if(e.legajo == legajo):
+                    cont+=1
+            if cont==0:
+                legajo=input("El legajo no existe. Ingrese el legajo nuevamente:") 
+                legajo = empleado.check_legajo_existente(legajo, lista_empleado)
+                return legajo
+
+
+
+            elif cont==1:
+                return legajo 
+                                                     
+        return legajo 
+    
+     
                              
     #chequear sector: que sea un sector preexistente
     @staticmethod
@@ -295,11 +329,15 @@ class vuelo:
         return nro_vuelo
     
     #Chequea si el precio ingresado es un número positivo
+    
+    
     @staticmethod
     def check_precio_vuelo(precio):
-        while int(precio) < 0 or not precio.isnumeric():
+        while  not precio.isnumeric() or int(precio) < 0 :
             precio = input("El precio tiene que ser un número positivo: ")
         return precio
+    
+
 
     #Busca en la clase empleado si el legajo dado corresponde a un empleado, luego verifica si es un piloto
     @staticmethod
@@ -324,7 +362,7 @@ class viaje:
     def __init__(self,nro_viaje,nro_vuelo,nro_serie,fecha):
         self.nro_viaje=nro_viaje
         self.nro_vuelo=nro_vuelo
-        self.nro_avion=nro_serie
+        self.nro_serie=nro_serie
         self.fecha=fecha
         self.pasajeros=[]
         self.contador_pasajeros = 0
@@ -421,7 +459,7 @@ class reserva:
     @staticmethod
     def check_sintaxis_nro_reserva(nro_reserva):
         while(nro_reserva.isnumeric()!=True or len(nro_reserva)!=4):
-            nro_reserva=input('Error, el nro. de factura tiene que ser un numero de 4 digitos. Ingrese nuevamente:    ')
+            nro_reserva=input('Error, el nro. de reserva tiene que ser un numero de 4 digitos. Ingrese nuevamente:    ')
         return nro_reserva
     @staticmethod
     def check_existencia_nro_reserva(nro_reserva,lista_reserva):        
