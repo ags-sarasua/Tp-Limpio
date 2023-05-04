@@ -297,7 +297,7 @@ class vuelo:
     #Chequea si el precio ingresado es un número positivo
     @staticmethod
     def check_precio_vuelo(precio):
-        while int(precio) < 0 or not precio.isnumeric():
+        while not precio.isnumeric() or int(precio) < 0 :
             precio = input("El precio tiene que ser un número positivo: ")
         return precio
 
@@ -324,7 +324,7 @@ class viaje:
     def __init__(self,nro_viaje,nro_vuelo,nro_serie,fecha):
         self.nro_viaje=nro_viaje
         self.nro_vuelo=nro_vuelo
-        self.nro_avion=nro_serie
+        self.nro_serie=nro_serie
         self.fecha=fecha
         self.pasajeros=[]
         self.contador_pasajeros = 0

@@ -1,3 +1,8 @@
+from Clases import *
+from ListaObjetos import *
+import matplotlib.pyplot as mlp
+
+
 
 class Nodo():
     def __init__(self,dato=None,prox=None):
@@ -66,4 +71,32 @@ class Lista():
             nodo=nodo.prox
         
         return False
+
+    def lista_enlazada_txt(lista, archivo):
+    # abrir el archivo para escritura
+        with open(archivo, 'w') as archivo_salida:
+            # recorrer la lista enlazada y escribir cada elemento en el archivo
+            nodo_actual = lista.head
+            while nodo_actual:
+                archivo_salida.write(str(nodo_actual.dato.__dict__))
+                nodo_actual = nodo_actual.prox
+                #if nodo_actual:
+                    #archivo_salida.write('\n')
+
+
+    def crear_lista_enlazada_de_aviones_desde_diccionario(lista,clase,archivo):
+        # abrir el archivo para lectura
+        with open(archivo, 'r') as archivo_entrada:
+            # recorrer cada línea del archivo
+            for linea in archivo_entrada:
+                # convertir la línea en un diccionario
+                diccionario = eval(linea)
+                # crear una instancia de la clase Avion a partir del diccionario
+                avion = clase(**diccionario)
+                # agregar el avión a la lista enlazada
+                lista.append(avion)
+        # retornar la lista enlazada
+        return lista
+
+
 
